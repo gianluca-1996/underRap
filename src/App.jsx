@@ -1,10 +1,15 @@
 import './App.css'
+import Nav from './components/Nav/nav'
+import Main from './components/Main/main'
+import Footer from './components/Footer/footer'
 
 function App() {
 
   return (
     <>
-      <h1>Hola underRap</h1>
+      <Nav/>
+      <Main/>
+      <Footer/>
     </>
   )
 }
