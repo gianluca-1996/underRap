@@ -1,14 +1,18 @@
 .navContainer{
-    background-color: black;
+    background-color: #EB4413;
     text-align: center;
     padding-top: 1rem;
     color: gold;
 }
 
 .colSesion{
-    text-align: center;
+    text-align: end;
 }
 
 .colLinks{
     padding-top: 1rem;
+}
+
+#tituloApp{
+    text-align: start;
 }

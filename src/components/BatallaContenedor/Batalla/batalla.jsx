@@ -10,21 +10,21 @@ function Batalla({batallas}){
     return(
         <>
             {batallas.map((item) => 
-                <Card sx={{ width: '27rem', height:'43rem', textAlign:'center', padding:'1rem', margin:'3px' }}>
+                <Card sx={{ width: '27rem', height:'43rem', textAlign:'center', padding:'1rem', margin:'3px' }} id='cardItem'>
                     <CardMedia
                     sx={{ height: '30rem' }}
                     image={item.img}
                     title={item.titulo}
                     />
                     <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom className='descripcionCard' variant="h5" component="div">
                         {item.titulo}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography className='descripcionCard' variant="body2">
                         {item.descripcion}
                     </Typography>
                     </CardContent>
-                    <Button variant="contained">Mas Info</Button>
+                    <Button id='btnMasInfoCard' variant="contained">Mas Info</Button>
                 </Card>
             )}
         </>

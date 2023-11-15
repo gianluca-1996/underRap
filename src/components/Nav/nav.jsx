@@ -8,28 +8,28 @@ const Nav = () => {
     return(
         <Container fluid className='navContainer'>
             <Row>
-                <Col sm={4}>
+                <Col sm={4} id='tituloApp'>
                     <h1>underRap</h1>
                 </Col>
-                <Col sm={6}>
+                <Col sm={4}>
                     <Row>
                         <Col>
-                            <p className='colLinks'>Home</p>
+                            <h4 className='colLinks'>Home</h4>
                         </Col>
                         <Col>
-                            <p className='colLinks'>Batallas</p>
+                            <h4 className='colLinks'>Batallas</h4>
                         </Col>
                         <Col>
-                            <p className='colLinks'>Contacto</p>
+                            <h4 className='colLinks'>Contacto</h4>
                         </Col>
                     </Row>
                 </Col>
-                <Col sm={2}>
+                <Col sm={4}>
                     <Row>
-                        <p className='colSesion'>Iniciar sesion</p>
+                        <h4 className='colSesion'>Iniciar sesion</h4>
                     </Row>
-                    <Row className='colSesion'>
-                    <p className='colSesion'>Registrarme</p>
+                    <Row>
+                        <h4 className='colSesion'>Registrarme</h4>
                     </Row>
                 </Col>
             </Row>

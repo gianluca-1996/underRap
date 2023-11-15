@@ -3,6 +3,7 @@ import "./batallas.css"
 import Batalla from './Batalla/batalla';
 import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
+import Buscador from '../Buscador/buscador';
 
 function BatallasContenedor(){
     const [items, setItems] = useState(null); 
@@ -18,13 +19,16 @@ function BatallasContenedor(){
                 {titulo: 'batalla 3', descripcion: 'descripcion batalla 3', img: 'src/assets/img/img3.png'},
                 {titulo: 'batalla 2', descripcion: 'descripcion batalla 2', img: 'src/assets/img/imagen2.jpg'}
             ]);
-        }, 2500);
+        }, 5000);
     }, []);
 
     return(
-        <Container fluid id='batallaContainer'>
-            {items ? <Batalla batallas={items}/> : <Spinner animation="grow" variant="warning"/>}
-        </Container>
+        <div id='contenedor-batallas'>
+            {items && <Buscador/>}
+            <Container fluid id='batallaContainer'>
+                {items ? <Batalla batallas={items}/> : <Spinner id='spinBatallas' animation="grow"/>}
+            </Container>
+        </div>
     );
 }
 

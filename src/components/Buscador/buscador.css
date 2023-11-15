@@ -1,0 +1,11 @@
+#buscador{
+    background-color: #110909;
+    padding-top: 5%;
+    align-items: center;
+    justify-content: center;
+}
+
+#btnBuscar{
+    background-color: #EB4413;
+    color: gold;
+}
