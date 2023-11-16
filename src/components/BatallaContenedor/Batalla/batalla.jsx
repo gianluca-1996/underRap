@@ -10,7 +10,7 @@ function Batalla({batallas}){
     return(
         <>
             {batallas.map((item) => 
-                <Card sx={{ width: '27rem', height:'43rem', textAlign:'center', padding:'1rem', margin:'3px' }} id='cardItem'>
+                <Card key={item.id} sx={{ width: '27rem', height:'43rem', textAlign:'center', padding:'1rem', margin:'3px' }} id='cardItem'>
                     <CardMedia
                     sx={{ height: '30rem' }}
                     image={item.img}
