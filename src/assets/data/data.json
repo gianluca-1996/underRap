@@ -1,9 +1,72 @@
 [
-    {"id": 1, "titulo": "batalla 1", "descripcion": "descripcion batalla 1", "img": "src/assets/img/imagen1.jpg"}, 
-    {"id": 2, "titulo": "batalla 2", "descripcion": "descripcion batalla 2", "img": "src/assets/img/imagen2.jpg"},
-    {"id": 3, "titulo": "batalla 3", "descripcion": "descripcion batalla 3", "img": "src/assets/img/img3.png"},
-    {"id": 4, "titulo": "batalla 4", "descripcion": "descripcion batalla 4", "img": "src/assets/img/img4.png"},
-    {"id": 5, "titulo": "batalla 1", "descripcion": "descripcion batalla 1", "img": "src/assets/img/imagen1.jpg"}, 
-    {"id": 6, "titulo": "batalla 3", "descripcion": "descripcion batalla 3", "img": "src/assets/img/img3.png"},
-    {"id": 7, "titulo": "batalla 2", "descripcion": "descripcion batalla 2", "img": "src/assets/img/imagen2.jpg"}
+    {
+        "id": 1, 
+        "titulo": "batalla 1", 
+        "descripcion": "descripcion batalla", 
+        "img": "src/assets/img/imagen1.jpg",
+        "localidad": "Lomas de Zamora",
+        "precio": 100,
+        "hora": "18:00",
+        "organizador": "undeRap96"
+    }, 
+    {
+        "id": 2, 
+        "titulo": "batalla 2", 
+        "descripcion": "descripcion batalla", 
+        "img": "src/assets/img/imagen2.jpg",
+        "localidad": "Temperley",
+        "precio": 120,
+        "hora": "18:00",
+        "organizador": "undeRap96"
+    },
+    {
+        "id": 3, 
+        "titulo": "batalla 3", 
+        "descripcion": "descripcion batalla", 
+        "img": "src/assets/img/img3.png",
+        "localidad": "Adrogue",
+        "precio": 150,
+        "hora": "18:00",
+        "organizador": "undeRap96"
+    },
+    {
+        "id": 4, 
+        "titulo": "batalla 4", 
+        "descripcion": "descripcion batalla", 
+        "img": "src/assets/img/img4.png",
+        "localidad": "Banfield",
+        "precio": 110,
+        "hora": "18:00",
+        "organizador": "undeRap96"
+    },
+    {
+        "id": 5, 
+        "titulo": "batalla 1", 
+        "descripcion": "descripcion batalla", 
+        "img": "src/assets/img/imagen1.jpg",
+        "localidad": "Avellaneda",
+        "precio": 150,
+        "hora": "18:00",
+        "organizador": "undeRap96"
+    }, 
+    {
+        "id": 6, 
+        "titulo": "batalla 3", 
+        "descripcion": "descripcion batalla", 
+        "img": "src/assets/img/img3.png",
+        "localidad": "Claypole",
+        "precio": 140,
+        "hora": "18:00",
+        "organizador": "undeRap96"
+    },
+    {
+        "id": 7, 
+        "titulo": "batalla 2", 
+        "descripcion": "descripcion batalla", 
+        "img": "src/assets/img/imagen2.jpg",
+        "localidad": "Rafael Calzada",
+        "precio": 130,
+        "hora": "18:00",
+        "organizador": "undeRap96"
+    }
 ]

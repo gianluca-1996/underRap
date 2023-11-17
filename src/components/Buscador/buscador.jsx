@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import Boton from '../Boton/boton';
 import "./buscador.css"
 
 function Buscador(){
@@ -17,7 +17,7 @@ function Buscador(){
                 />
             </Col>
             <Col xs="auto">
-                <Button id='btnBuscar' type="submit" variant="contained">Buscar</Button>
+                <Boton type="submit" texto={'Buscar'} />
             </Col>
         </Row>
         </Container>

@@ -1,8 +1,7 @@
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
+import Boton from '../../Boton/boton';
 import Typography from '@mui/material/Typography';
 import "./batalla.css"
 
@@ -24,7 +23,7 @@ function Batalla({batallas}){
                         {item.descripcion}
                     </Typography>
                     </CardContent>
-                    <Button id='btnMasInfoCard' variant="contained">Mas Info</Button>
+                    <Boton texto={'Mas Info'}/>
                 </Card>
             )}
         </>

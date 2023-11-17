@@ -21,7 +21,7 @@ function BatallasContenedor(){
         <div id='contenedor-batallas'>
             {items && <Buscador/>}
             <Container fluid id='batallaContainer'>
-                {items ? <Batalla batallas={items}/> : <Spinner id='spinBatallas' animation="grow"/>}
+                {items ? <Batalla batallas={items}/> : <Spinner className='spinBatallas' animation="grow"/>}
             </Container>
         </div>
     );

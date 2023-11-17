@@ -1,0 +1,33 @@
+#detalleContenedor{
+    min-height: 40rem;
+    background-color: #110909;
+}
+
+#imgDetalle{
+    width: 100%;
+    box-shadow: 0px 0px 30px #EB4413;
+    border-radius: 10px;
+}
+
+#filaDetalle{
+    padding: 2%;
+}
+
+#infoBatallaH1{
+    width: 100%;
+}
+
+#rowInfoDetalle{
+    color: gold;
+    text-align: center;
+    margin-top: 5%;
+}
+
+#mapaInfo{
+    border-radius: 10px;
+    margin-top: 5%;
+}
+
+.rowBtnDetalle{
+    margin-top: 2%;
+}
