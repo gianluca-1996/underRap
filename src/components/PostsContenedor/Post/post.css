@@ -1,0 +1,51 @@
+#cardPost{
+    background-color: #F6F60F;
+    border-radius: 15px;
+    color: black;
+    box-shadow: 0px 3px 5px #F6F60F;
+}
+
+#containerPost{
+    padding: 2%;
+}
+
+#rowPost{
+    justify-content: center;
+}
+
+#textoPost{
+    color: black;
+    margin: 2%;
+}
+
+#rowComLik{
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.mesYFecha{
+    margin-top: 5%;
+}
+
+#rowComentario{
+    margin-top: 5%;
+    justify-content: center;
+}
+
+#rowBtnPublicarComentario{
+    justify-content: center;
+}
+
+#btnPublicar{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.btnMgComent{
+    border: none;
+    background-color: #DEDBB4;
+}
+
+#rowIconos{
+    margin-top: 5%;
+}

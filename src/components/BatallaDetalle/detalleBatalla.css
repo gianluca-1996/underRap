@@ -29,5 +29,9 @@
 }
 
 .rowBtnDetalle{
-    margin-top: 2%;
+    margin-top: 3%;
+}
+
+#rowBtnInscripComp{
+    justify-content: center;
 }

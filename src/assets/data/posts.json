@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "usuario": "underApp",
+        "fecha": "2023-11-30",
+        "hora": "21:00",
+        "texto": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus",
+        "meGusta": 0,
+        "comentarios": []
+    },
+    {
+        "id": 2,
+        "usuario": "underApp",
+        "fecha": "2023-11-30",
+        "hora": "21:00",
+        "texto": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus placeat, labore laudantium aperiam, beatae error sed quam excepturi. Sequi!",
+        "meGusta": 2,
+        "comentarios": []
+    },
+    {
+        "id": 3,
+        "usuario": "underApp",
+        "fecha": "2023-11-30",
+        "hora": "21:00",
+        "texto": "Este sabado se rapea en la plaza de Banfield!",
+        "meGusta": 5,
+        "comentarios": []
+    },
+    {
+        "id": 4,
+        "usuario": "underApp",
+        "fecha": "2023-11-30",
+        "hora": "21:00",
+        "texto": "Este sabado se rapea en la plaza de Burzaco!",
+        "meGusta": 1,
+        "comentarios": []
+    },
+    {
+        "id": 5,
+        "usuario": "underApp",
+        "fecha": "2023-11-30",
+        "hora": "21:00",
+        "texto": "Este sabado se rapea en la plaza de Adrogué!",
+        "meGusta": 10,
+        "comentarios": []
+    }
+]

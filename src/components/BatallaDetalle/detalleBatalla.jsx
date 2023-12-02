@@ -37,11 +37,15 @@ function DetalleBatalla(){
                             <h2>Organizador: {batalla.organizador}</h2>
                         </Row>
                         <iframe id='mapaInfo' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52456.17831840319!2d-58.423933187558056!3d-34.74271476327053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd2a1814f921f%3A0x1ff108ea8ecb9dd6!2sBanfield%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700177288332!5m2!1ses!2sar" style= {{border:0, width: '100%', height: '50'}} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-                        <Row className='rowBtnDetalle'>
-                            <Boton texto={'Inscribirme'}/>
-                        </Row>
-                        <Row className='rowBtnDetalle'>
-                            <Boton texto={'Compartir'}/>
+                        <Row id='rowBtnInscripComp'>
+                            <Col sm={6}>
+                                <Row className='rowBtnDetalle'>
+                                    <Boton texto={'Inscribirme'}/>
+                                </Row>
+                                <Row className='rowBtnDetalle'>
+                                    <Boton texto={'Compartir'}/>
+                                </Row>
+                            </Col>
                         </Row>
                     </Col>
                 </Row>
