@@ -1,37 +1,44 @@
 #detalleContenedor{
-    min-height: 40rem;
+    min-height: 87vh;
     background-color: #110909;
+    display: flex;
+    flex-direction: row;
+}
+
+#cardInfoBatalla{
+    background-color: #eeeeee;
+    padding: 2%;
+    border-radius: 15px;
 }
 
 #imgDetalle{
-    width: 100%;
-    box-shadow: 0px 0px 30px #EB4413;
-    border-radius: 10px;
+    box-shadow: 0px 0px 30px #eeeeee;
+    border-radius: 15px;
+    width: 40vw;
+    height: 80%;
 }
 
 #filaDetalle{
-    padding: 2%;
-}
-
-#infoBatallaH1{
+    margin: 2%;
     width: 100%;
 }
 
-#rowInfoDetalle{
-    color: gold;
+#cardContentInfoBatalla{
+    background-color: #bdbdbd;
+    border-radius: 15px;
+}
+
+#tituloEventoInfo{
     text-align: center;
-    margin-top: 5%;
 }
 
 #mapaInfo{
     border-radius: 10px;
-    margin-top: 5%;
+    width: 100%;
 }
 
-.rowBtnDetalle{
-    margin-top: 3%;
-}
-
-#rowBtnInscripComp{
-    justify-content: center;
+.rowBtnInscripcionCompartir{
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 2%;
 }

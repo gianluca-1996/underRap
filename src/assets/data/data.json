@@ -6,6 +6,7 @@
         "img": "src/assets/img/imagen1.jpg",
         "localidad": "Lomas de Zamora",
         "precio": 100,
+        "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96"
     }, 
@@ -16,6 +17,7 @@
         "img": "src/assets/img/imagen2.jpg",
         "localidad": "Temperley",
         "precio": 120,
+        "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96"
     },
@@ -26,6 +28,7 @@
         "img": "src/assets/img/img3.png",
         "localidad": "Adrogue",
         "precio": 150,
+        "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96"
     },
@@ -36,6 +39,7 @@
         "img": "src/assets/img/img4.png",
         "localidad": "Banfield",
         "precio": 110,
+        "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96"
     },
@@ -46,6 +50,7 @@
         "img": "src/assets/img/imagen1.jpg",
         "localidad": "Avellaneda",
         "precio": 150,
+        "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96"
     }, 
@@ -56,6 +61,7 @@
         "img": "src/assets/img/img3.png",
         "localidad": "Claypole",
         "precio": 140,
+        "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96"
     },
@@ -66,6 +72,7 @@
         "img": "src/assets/img/imagen2.jpg",
         "localidad": "Rafael Calzada",
         "precio": 130,
+        "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96"
     }
