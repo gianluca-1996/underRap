@@ -84,12 +84,16 @@ function Post({post}){
                                     <Chip label={<><AccessTimeIcon /> {post.hora}</>} />
                                 </Row>
                                 <Row id='rowAcciones'>
-                                    <IconButton onClick={onClickMeGusta}>
-                                        <ThumbUpAltIcon color={meGusta ? 'error' : 'none'} />    
-                                    </IconButton>
-                                    <IconButton onClick={handleMuestraComentario}>
-                                        <AddCommentIcon />
-                                    </IconButton>
+                                    <Col className='colMegustaComent' xs={6}>
+                                        <IconButton onClick={onClickMeGusta}>
+                                            <ThumbUpAltIcon color={meGusta ? 'error' : 'none'} />    
+                                        </IconButton>
+                                    </Col>
+                                    <Col className='colMegustaComent' xs={6}>
+                                        <IconButton onClick={handleMuestraComentario}>
+                                            <AddCommentIcon />
+                                        </IconButton>
+                                    </Col>
                                 </Row>
                                 <Row id='rowComentario' hidden={muestraComent}>
                                     <Col sm={10}>
