@@ -1,21 +1,23 @@
 [
     {
         "id": 1,
-        "usuario": "underApp",
-        "fecha": "2023-11-30",
+        "usuario": "Gian96",
+        "fecha": "2023-12-4",
         "hora": "21:00",
         "texto": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus",
         "meGusta": 0,
-        "comentarios": []
+        "comentarios": [],
+        "imagen": "src/assets/img/img4.png"
     },
     {
         "id": 2,
-        "usuario": "underApp",
-        "fecha": "2023-11-30",
+        "usuario": "Gianluca Cambareri",
+        "fecha": "2023-12-3",
         "hora": "21:00",
         "texto": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus placeat, labore laudantium aperiam, beatae error sed quam excepturi. Sequi!",
         "meGusta": 2,
-        "comentarios": []
+        "comentarios": [],
+        "imagen": "src/assets/img/img3.png"
     },
     {
         "id": 3,
@@ -24,7 +26,8 @@
         "hora": "21:00",
         "texto": "Este sabado se rapea en la plaza de Banfield!",
         "meGusta": 5,
-        "comentarios": []
+        "comentarios": [],
+        "imagen": "src/assets/img/imagen2.jpg"
     },
     {
         "id": 4,
@@ -33,15 +36,17 @@
         "hora": "21:00",
         "texto": "Este sabado se rapea en la plaza de Burzaco!",
         "meGusta": 1,
-        "comentarios": []
+        "comentarios": [],
+        "imagen": "src/assets/img/img4.png"
     },
     {
         "id": 5,
         "usuario": "underApp",
-        "fecha": "2023-11-30",
+        "fecha": "2022-11-30",
         "hora": "21:00",
         "texto": "Este sabado se rapea en la plaza de Adrogué!",
         "meGusta": 10,
-        "comentarios": []
+        "comentarios": [],
+        "imagen": "src/assets/img/img3.png"
     }
 ]

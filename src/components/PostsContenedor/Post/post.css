@@ -1,8 +1,8 @@
 #cardPost{
-    background-color: #F6F60F;
+    background-color: #eeeeee;
     border-radius: 15px;
     color: black;
-    box-shadow: 0px 3px 5px #F6F60F;
+    box-shadow: 0px 3px 5px #eeeeee;
 }
 
 #containerPost{
@@ -16,29 +16,23 @@
 #textoPost{
     color: black;
     margin: 2%;
-}
-
-#rowComLik{
-    justify-content: center;
-    margin-top: 5%;
-}
-
-.mesYFecha{
-    margin-top: 5%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    padding: 3%;
 }
 
 #rowComentario{
-    margin-top: 5%;
+    margin-top: 2%;
     justify-content: center;
 }
 
 #rowBtnPublicarComentario{
-    justify-content: center;
+    margin-top: 3%;
 }
 
 #btnPublicar{
     width: 100%;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .btnMgComent{
@@ -46,6 +40,42 @@
     background-color: #DEDBB4;
 }
 
-#rowIconos{
-    margin-top: 5%;
+.rowFechaHora{
+    margin: 2%;
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+#rowAcciones{
+    justify-content: center;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+#fotoPost{
+    width: 60px; /* Puedes ajustar el tamaño del círculo según tus necesidades */
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 2px black;
+}
+
+#fotoPost img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#colNombreUsuario{
+    padding-top: 3%;
+}
+
+
+@media (max-width: 500px){
+    #rowFotoUser{
+        justify-content: center;
+    }
+    #rowAcciones{
+        
+    }
 }

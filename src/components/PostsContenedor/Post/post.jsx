@@ -1,5 +1,4 @@
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -14,13 +13,24 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useState } from 'react';
 import Boton from '../../Boton/boton';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import "./post.css"
 
 function Post({post}){
 
     const [muestraComent, setMuestraComent] = useState(true);
     const [comentario, setComentario] = useState('');
-    const [meGustaColor, setMeGustaColor] = useState(false);
+    const [meGusta, setMeGusta] = useState(false);
+
+    let fechaActual = new Date();
+    let fechaPost = new Date(post.fecha);
+    let diferenciaEnMiliSegundos = fechaActual - fechaPost;
+    let diferenciaEnDias = Math.floor(diferenciaEnMiliSegundos / (1000 * 60 * 60 * 24));
+    let fechaFinalDif;
+
+    if(diferenciaEnDias == 0) fechaFinalDif = 'Hoy';
+    if(diferenciaEnDias > 0 && diferenciaEnDias < 2)   fechaFinalDif = 'Ayer';
+    if(diferenciaEnDias >= 2)   fechaFinalDif = `Hace ${diferenciaEnDias} dias`;
 
     const handleMuestraComentario = () => {
         setMuestraComent((previa) => !previa);
@@ -37,7 +47,7 @@ function Post({post}){
     }
 
     const onClickMeGusta = () => {
-        setMeGustaColor((previa) => !previa);
+        setMeGusta((previa) => !previa);
     }
 
     return(
@@ -46,42 +56,40 @@ function Post({post}){
                     <Col sm={6}>
                         <Card id="cardPost">
                             <CardContent>
-                                <Row>
-                                    <Col sm={1}>
-                                        
+                                <Row id='rowFotoUser'>
+                                    <Col xs={2}>
+                                        <div id='fotoPost'>
+                                            <img src={post.imagen} alt="usuario" />
+                                        </div>
                                     </Col>
-                                    <Col>                                        
+                                    <Col xs={4} id='colNombreUsuario'>                                    
                                         <Typography gutterBottom variant="h5" component="div">
-                                            {post.usuario}
+                                            <strong>
+                                                {post.usuario}
+                                            </strong>
                                         </Typography>
                                     </Col>
                                 </Row>
+                                <hr />
                                 <Typography variant="body2" id="textoPost">
+                                    <strong>
                                     {post.texto}
+                                    </strong>
                                 </Typography>
-                                <Row id='rowIconos'>
-                                    <Col sm={1}>
-                                        <CalendarMonthIcon />
-                                    </Col>
-                                    <Col sm={3}>
-                                        <Chip label={post.fecha} />
-                                    </Col>
-                                    <Col sm={1}>
-                                        <AccessTimeIcon />
-                                    </Col>
-                                    <Col sm={4}>
-                                        <Chip label={post.hora} />
-                                    </Col>
-                                    <Col sm={1}>
-                                        <IconButton onClick={onClickMeGusta}>
-                                            <FavoriteIcon color={meGustaColor ? 'error' : 'none'} />    
-                                        </IconButton>
-                                    </Col>
-                                    <Col sm={1}>
-                                        <IconButton onClick={handleMuestraComentario}>
-                                            <AddCommentIcon />
-                                        </IconButton>
-                                    </Col>
+                                <hr />
+                                <Row className='rowFechaHora'>
+                                    <Chip label={<><CalendarMonthIcon /> {fechaFinalDif}</>} />
+                                </Row>
+                                <Row className='rowFechaHora'>
+                                    <Chip label={<><AccessTimeIcon /> {post.hora}</>} />
+                                </Row>
+                                <Row id='rowAcciones'>
+                                    <IconButton onClick={onClickMeGusta}>
+                                        <ThumbUpAltIcon color={meGusta ? 'error' : 'none'} />    
+                                    </IconButton>
+                                    <IconButton onClick={handleMuestraComentario}>
+                                        <AddCommentIcon />
+                                    </IconButton>
                                 </Row>
                                 <Row id='rowComentario' hidden={muestraComent}>
                                     <Col sm={10}>
@@ -95,11 +103,9 @@ function Post({post}){
                                                 onChange={onChangeComent}/>
                                             </Row>
                                             <Row id='rowBtnPublicarComentario'>
-                                                <Col sm={3}>
                                                     <Boton id='btnPublicar'
-                                                    type='submit'
+                                                    submit={'submit'}
                                                     texto={'Publicar'} />
-                                                </Col>
                                             </Row>
                                         </form>
                                     </Col>

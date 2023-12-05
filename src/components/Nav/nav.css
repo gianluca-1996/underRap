@@ -1,8 +1,8 @@
 .navContainer{
-    background-color: #525249;
+    background-color: #eeeeee;
     text-align: center;
     padding-top: 1rem;
-    color: #F6F60F;
+    color: #212121;
 }
 
 .colSesion{
@@ -15,4 +15,15 @@
 
 #tituloApp{
     text-align: start;
+}
+
+@media (max-width: 500px){
+    #tituloApp{
+        text-align: center;
+    }
+
+    .colSesion{
+        text-align: center;
+        margin-top: 3%;
+    }
 }
