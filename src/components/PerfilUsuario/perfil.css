@@ -1,0 +1,87 @@
+#contenedorPerfil{
+    min-height: 70vh;
+    background-color: #212121;
+    padding: 0;
+}
+
+#portada{
+    height: 83vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-y: top;
+}
+
+#fotoPerfil{
+    position: absolute;
+    height: 39vh;
+    width: 22vw;
+    border-radius: 50%;
+    overflow: hidden;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: solid 2px black;
+    margin-top: 41vh;
+}
+
+.usuarioInfoPerfil{
+    color: #eeeeee;
+}
+
+#colUsuarioInfo{
+    background-color: #424242;
+    border-radius: 15px;
+    margin: 0;
+    height: auto;
+}
+
+#rowInfoUsuario{
+    padding: 3%;
+    justify-content: space-between;
+    margin-right: 0;
+}
+
+#colActividadPerfil{
+    background-color: #424242;
+    border-radius: 15px;
+}
+
+#colActividadPerfil h2{
+    text-align: center;
+    color: #eeeeee;
+}
+
+#tituloAkaUsuario{
+    text-align: center;
+    border-radius: 15px;
+    background-color: #424242;
+    padding: 3%;
+    
+}
+
+@media (max-width: 500px){
+    #fotoPerfil{
+        height: 30vh;
+        width: 40vw;
+        margin-top: 50vh;
+    }
+
+    #colActividadPerfil{
+        margin-top: 3%;
+    }
+
+    #rowInfoUsuario{
+        margin: 0;
+        padding: 5%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+    #fotoPerfil{
+        height: 30vh;
+        width: 25vw;
+        margin-top: 50vh;
+    }
+}

@@ -1,6 +1,7 @@
 [
     {
         "id": 1,
+        "usuarioId": 1,
         "usuario": "Gian96",
         "fecha": "2023-12-4",
         "hora": "21:00",
@@ -11,6 +12,7 @@
     },
     {
         "id": 2,
+        "usuarioId": 1,
         "usuario": "Gianluca Cambareri",
         "fecha": "2023-12-3",
         "hora": "21:00",
@@ -21,6 +23,7 @@
     },
     {
         "id": 3,
+        "usuarioId": 2,
         "usuario": "underApp",
         "fecha": "2023-11-30",
         "hora": "21:00",
@@ -31,6 +34,7 @@
     },
     {
         "id": 4,
+        "usuarioId": 2,
         "usuario": "underApp",
         "fecha": "2023-11-30",
         "hora": "21:00",
@@ -41,6 +45,7 @@
     },
     {
         "id": 5,
+        "usuarioId": 1,
         "usuario": "underApp",
         "fecha": "2022-11-30",
         "hora": "21:00",
