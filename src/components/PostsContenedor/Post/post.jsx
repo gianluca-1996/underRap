@@ -16,7 +16,7 @@ import Boton from '../../Boton/boton';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import "./post.css"
 
-function Post({post}){
+function Post({post, columnas = 6}){
 
     const [muestraComent, setMuestraComent] = useState(true);
     const [comentario, setComentario] = useState('');
@@ -53,7 +53,7 @@ function Post({post}){
     return(
             <Container fluid id='containerPost'>
                 <Row id='rowPost'>
-                    <Col sm={6}>
+                    <Col sm={columnas}>
                         <Card id="cardPost">
                             <CardContent>
                                 <Row id='rowFotoUser'>

@@ -15,15 +15,15 @@
 
 #fotoPerfil{
     position: absolute;
-    height: 39vh;
-    width: 22vw;
+    height: 30vh;
+    width: 15vw;
     border-radius: 50%;
     overflow: hidden;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border: solid 2px black;
-    margin-top: 41vh;
+    margin-top: 53vh;
 }
 
 .usuarioInfoPerfil{
@@ -33,14 +33,13 @@
 #colUsuarioInfo{
     background-color: #424242;
     border-radius: 15px;
-    margin: 0;
-    height: auto;
+    max-height: 50vh;
 }
 
 #rowInfoUsuario{
     padding: 3%;
-    justify-content: space-between;
     margin-right: 0;
+    justify-content: space-between;
 }
 
 #colActividadPerfil{
@@ -53,19 +52,19 @@
     color: #eeeeee;
 }
 
-#tituloAkaUsuario{
+.tituloAkaUsuario{
     text-align: center;
     border-radius: 15px;
     background-color: #424242;
-    padding: 3%;
-    
+    padding: 1%;   
 }
+
 
 @media (max-width: 500px){
     #fotoPerfil{
-        height: 30vh;
-        width: 40vw;
-        margin-top: 50vh;
+        height: 20vh;
+        width: 26vw;
+        margin-top: 63vh;
     }
 
     #colActividadPerfil{
