@@ -6,6 +6,7 @@ function Boton({texto, submit}){
     const ColorButton = styled(Button)(({ theme }) => ({
         color: theme.palette.getContrastText(blue[800]),
         backgroundColor: blue[800],
+        width: '100%',
         '&:hover': {
           backgroundColor: blue[700],
         }

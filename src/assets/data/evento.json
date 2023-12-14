@@ -9,7 +9,8 @@
         "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96",
-        "organizadorId": 1
+        "organizadorId": 1,
+        "competidores": [2, 3, 2]
     }, 
     {
         "id": 2, 
@@ -21,7 +22,8 @@
         "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96",
-        "organizadorId": 1
+        "organizadorId": 1,
+        "competidores": [2, 3, 2]
     },
     {
         "id": 3, 
@@ -33,7 +35,8 @@
         "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96",
-        "organizadorId": 2
+        "organizadorId": 2,
+        "competidores": [2, 3]
     },
     {
         "id": 4, 
@@ -45,7 +48,8 @@
         "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96",
-        "organizadorId": 2
+        "organizadorId": 2,
+        "competidores": [2, 3, 2]
     },
     {
         "id": 5, 
@@ -57,30 +61,7 @@
         "fecha": "2023-12-5",
         "hora": "18:00",
         "organizador": "undeRap96",
-        "organizadorId": 3
-    }, 
-    {
-        "id": 6, 
-        "titulo": "batalla 3", 
-        "descripcion": "descripcion batalla", 
-        "img": "src/assets/img/img3.png",
-        "localidad": "Claypole",
-        "precio": 140,
-        "fecha": "2023-12-5",
-        "hora": "18:00",
-        "organizador": "undeRap96",
-        "organizadorId": 2
-    },
-    {
-        "id": 7, 
-        "titulo": "batalla 2", 
-        "descripcion": "descripcion batalla", 
-        "img": "src/assets/img/imagen2.jpg",
-        "localidad": "Rafael Calzada",
-        "precio": 130,
-        "fecha": "2023-12-5",
-        "hora": "18:00",
-        "organizador": "undeRap96",
-        "organizadorId": 3
+        "organizadorId": 3,
+        "competidores": [3, 2]
     }
 ]

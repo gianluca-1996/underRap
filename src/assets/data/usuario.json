@@ -15,9 +15,6 @@
         "seguidos": [
             {"id": 2}, {"id": 3}
         ],
-        "eventosOrganizados": [
-            {"id": 1}, {"id": 2}, {"id": 3}
-        ],
         "fotoPerfil": "src/assets/img/imagen2.jpg",
         "portada": "src/assets/img/imagen1.jpg"
     },
@@ -37,7 +34,6 @@
         "seguidos": [
             {"id": 1}, {"id": 3}
         ],
-        "eventosOrganizados": [],
         "fotoPerfil": "src/assets/img/img3.png",
         "portada": "src/assets/img/img4.png"
     },
@@ -57,7 +53,6 @@
         "seguidos": [
             {"id": 1}, {"id": 2}
         ],
-        "eventosOrganizados": [],
         "fotoPerfil": "src/assets/img/img4.png",
         "portada": "src/assets/img/img3.png"
     }

@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Post from '../PostsContenedor/Post/post'
 import { useEffect, useState } from 'react';
 import "./perfil.css"
+import Boton from '../Boton/boton';
 
 function Perfil(){
 
@@ -44,12 +45,24 @@ function Perfil(){
                         <div id='portada' style={{backgroundImage: `url(${usuario.portada})`}}>
                             <div id='fotoPerfil' style={{backgroundImage: `url(${usuario.fotoPerfil})`}}/>
                         </div>
+                        <Row id='rowAKA'>
+                            <Col sm={4}>
+                                <h2 className='usuarioInfoPerfil tituloAkaUsuario'>AKA - {usuario.aka}</h2>
+                            </Col>
+                            <Col sm={6}>
+                                <h2 className='usuarioInfoPerfil tituloAkaUsuario'>
+                                    Seguidores: {usuario.seguidores.length} - 
+                                    Seguidos: {usuario.seguidos.length}
+                                </h2>
+                            </Col>
+                            {
+                                usuario.organizador && 
+                                <Col sm={2}>
+                                    <Boton texto={'Crear Evento'}/>
+                                </Col>
+                            }
+                        </Row>
                         <Row id='rowInfoUsuario'>
-                            <h2 className='usuarioInfoPerfil tituloAkaUsuario'>AKA - {usuario.aka}</h2>
-                            <h4 className='usuarioInfoPerfil tituloAkaUsuario'>
-                                Seguidores: {usuario.seguidores.length} - 
-                                Seguidos: {usuario.seguidos.length}
-                            </h4>
                             <Col sm={3} id='colUsuarioInfo'>
                                 <Row>
                                     <Col xs={2}>
@@ -75,13 +88,23 @@ function Perfil(){
                                         <h4 className='usuarioInfoPerfil'>{usuario.nacimiento}</h4>
                                     </Col>
                                 </Row>
-                                {usuario.organizador && 
+                                {
+                                    usuario.organizador ?
                                     <Row>
                                         <Col xs={2}>
                                             <CheckCircleIcon color='primary'/>
                                         </Col>
                                         <Col>
                                             <h4 className='usuarioInfoPerfil'>Organizador de eventos</h4>
+                                        </Col>
+                                    </Row>
+                                    :
+                                    <Row>
+                                        <Col xs={2}>
+                                            <CheckCircleIcon color='primary'/>
+                                        </Col>
+                                        <Col>
+                                            <h4 className='usuarioInfoPerfil'>Competidor</h4>
                                         </Col>
                                     </Row>
                                 }
@@ -98,7 +121,7 @@ function Perfil(){
                                 {
                                     posteosUsuario ?
                                     <>
-                                        <h2>Noticias</h2>
+                                        <h2>Actividad</h2>
                                         {posteosUsuario.map((post => <Post key={post.id} post={post} columnas={12}/>))}
                                     </>
                                     :
