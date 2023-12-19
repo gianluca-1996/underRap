@@ -25,7 +25,7 @@ function DetalleBatalla(){
 
     useEffect(() => {
         setTimeout(() => {    
-            fetch('src/assets/data/data.json')
+            fetch('src/assets/data/evento.json')
             .then(res => res.json())
             .then(data => {setBatalla(data[3])})
             .catch(error => {console.error('No se pudo leer el archivo JSON: ' + error)})

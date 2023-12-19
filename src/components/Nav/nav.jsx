@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 import "./nav.css"
 
 const Nav = () => {
@@ -14,13 +15,13 @@ const Nav = () => {
                 <Col sm={4}>
                     <Row>
                         <Col>
-                            <h4 className='colLinks'>Home</h4>
+                            <h4 className='colLinks'>Detalle</h4>
                         </Col>
                         <Col>
                             <h4 className='colLinks'>Batallas</h4>
                         </Col>
                         <Col>
-                            <h4 className='colLinks'>Contacto</h4>
+                            <h4 className='colLinks'>Perfil</h4>
                         </Col>
                     </Row>
                 </Col>

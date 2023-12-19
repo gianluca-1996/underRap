@@ -64,7 +64,7 @@ function Post({post, columnas = 6}){
                                     </Col>
                                     <Col xs={4} id='colNombreUsuario'>                                    
                                         <Typography gutterBottom variant="h5" component="div">
-                                            <strong>
+                                            <strong id='nombreUsuarioPost'>
                                                 {post.usuario}
                                             </strong>
                                         </Typography>

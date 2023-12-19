@@ -9,96 +9,38 @@ import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Post from '../PostsContenedor/Post/post'
-import { useCallback, useEffect, useReducer} from 'react';
-import "./perfil.css"
+import { useEffect, useReducer} from 'react';
+import useFetch from '../hooks/use-fetch';
 import Boton from '../Boton/boton';
-
-const usuarioEstado = {
-    usuario: null,
-    posteos: null,
-    error: null,
-    loadingUser: true
-}
-
-const usuarioReducer = (estado, accion) => {
-    if (accion.tipo === 'FETCH_START'){
-        return {
-            ...estado
-        };
-    }
-
-    if (accion.tipo === 'FETCH_SUCCES'){
-        return {
-            error: false,
-            usuario: accion.payload,
-            posteos: accion.posteos,
-            loadingUser: false
-        };
-    }
-
-    if (accion.tipo === 'FETCH_ERROR'){
-        return {
-            ...estado,
-            loadingUser: false,
-            error: accion.payload
-        };
-    }
-
-    return usuarioEstado;
-}
+import "./perfil.css"
 
 function Perfil(){
 
-    const [userPostState, dispatch] = useReducer(usuarioReducer, usuarioEstado);
-
-    const fetchData = useCallback(
-        async function fetchData(){
-            dispatch({ tipo: 'FETCH_START' });
-            
-            try {
-                const responseUser = await fetch('src/assets/data/usuario.json');
-                const responsePost = await fetch('src/assets/data/posts.json');
-                
-                if (!responseUser.ok || !responsePost.ok) {
-                    throw new Error('Failed to fetch data.');
-                }
-                
-                const usuarios = await responseUser.json();
-                const posteos = await responsePost.json();
-
-                dispatch({tipo: 'FETCH_SUCCES', payload: usuarios[0], posteos: posteos.filter((post) => post.usuarioId == 1)});
-            } catch (error) {
-                dispatch({ tipo: 'FETCH_ERROR', payload: 'error.message si' });
-            }
-        }, []
-    );
-
-    useEffect(() => {
-        setTimeout(() => {
-            fetchData();
-        }, 3000);
-    }, [fetchData]);
+    const {data, error, loading} = useFetch('src/assets/data/usuario.json');
+    const dataPost = useFetch('src/assets/data/posts.json');
+    const usuario = data ? data[0] : null;
+    const posteos = dataPost.data ? (dataPost.data.filter((post) => post.usuarioId == usuario.id)) : null;
 
     return(
         <Container fluid id='contenedorPerfil'>
             {
-                userPostState.usuario &&
+                usuario &&
                 <>
-                    <div id='portada' style={{backgroundImage: `url(${userPostState.usuario.portada})`}}>
-                        <div id='fotoPerfil' style={{backgroundImage: `url(${userPostState.usuario.fotoPerfil})`}}/>
+                    <div id='portada' style={{backgroundImage: `url(${usuario.portada})`}}>
+                        <div id='fotoPerfil' style={{backgroundImage: `url(${usuario.fotoPerfil})`}}/>
                     </div>
                     <Row id='rowAKA'>
                         <Col sm={4}>
-                            <h2 className='usuarioInfoPerfil tituloAkaUsuario'>AKA: "{userPostState.usuario.aka}"</h2>
+                            <h2 className='usuarioInfoPerfil tituloAkaUsuario'>AKA: "{usuario.aka}"</h2>
                         </Col>
                         <Col sm={6}>
                             <h2 className='usuarioInfoPerfil tituloAkaUsuario'>
-                                Seguidores: {userPostState.usuario.seguidores.length} - 
-                                Seguidos: {userPostState.usuario.seguidos.length}
+                                Seguidores: {usuario.seguidores.length} - 
+                                Seguidos: {usuario.seguidos.length}
                             </h2>
                         </Col>
                         {
-                            userPostState.usuario.organizador && 
+                            usuario.organizador && 
                             <Col sm={2}>
                                 <Boton texto={'Crear Evento'}/>
                             </Col>
@@ -111,7 +53,7 @@ function Perfil(){
                                     <AssignmentIndIcon color='primary'/>
                                 </Col>
                                 <Col>
-                                    <h4 className='usuarioInfoPerfil'>{userPostState.usuario.nombre} {userPostState.usuario.apellido}</h4>
+                                    <h4 className='usuarioInfoPerfil'>{usuario.nombre} {usuario.apellido}</h4>
                                 </Col>
                             </Row>
                             <Row>
@@ -119,7 +61,7 @@ function Perfil(){
                                     <LocationOnIcon color='primary'/>
                                 </Col>
                                 <Col>
-                                    <h4 className='usuarioInfoPerfil'>{userPostState.usuario.ciudad}</h4>
+                                    <h4 className='usuarioInfoPerfil'>{usuario.ciudad}</h4>
                                 </Col>
                             </Row>
                             <Row>
@@ -127,17 +69,17 @@ function Perfil(){
                                     <CalendarMonthIcon color='primary'/>
                                 </Col>
                                 <Col>
-                                    <h4 className='usuarioInfoPerfil'>{userPostState.usuario.nacimiento}</h4>
+                                    <h4 className='usuarioInfoPerfil'>{usuario.nacimiento}</h4>
                                 </Col>
                             </Row>
                             {
-                                userPostState.usuario.organizador ?
+                                usuario.organizador ?
                                 <Row>
                                     <Col xs={2}>
                                         <CheckCircleIcon color='primary'/>
                                     </Col>
                                     <Col>
-                                        <h4 className='usuarioInfoPerfil'>Organizador de eventos</h4>
+                                        <h4 className='usuarioInfoPerfil'>Rol: organizador</h4>
                                     </Col>
                                 </Row>
                                 :
@@ -146,7 +88,7 @@ function Perfil(){
                                         <CheckCircleIcon color='primary'/>
                                     </Col>
                                     <Col>
-                                        <h4 className='usuarioInfoPerfil'>Competidor</h4>
+                                        <h4 className='usuarioInfoPerfil'>Rol: competidor</h4>
                                     </Col>
                                 </Row>
                             }
@@ -161,18 +103,24 @@ function Perfil(){
                         </Col>
                         <Col sm={8} id='colActividadPerfil'>
                             {
-                                userPostState.posteos &&
+                                posteos &&
                                 <>
                                     <h2>Actividad</h2>
-                                    {userPostState.posteos.map((post => <Post key={post.id} post={post} columnas={12}/>))}
+                                    {posteos.map((post => <Post key={post.id} post={post} columnas={12}/>))}
+                                </>
+                            }
+                            {
+                                dataPost.error && 
+                                <>
+                                    <h1>{dataPost.error}</h1>
                                 </>
                             }
                         </Col>
                     </Row>
                 </>
             }
-            {userPostState.loadingUser && <Spinner className='spinBatallas' animation="grow"/>}
-            {userPostState.error && <h1>{userPostState.error}</h1>}
+            {loading && <Spinner className='spinBatallas' animation="grow"/>}
+            {error && <h1>{error}</h1>}
         </Container>
     )
 }
