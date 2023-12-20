@@ -6,14 +6,21 @@ import BatallasContenedor from './components/BatallaContenedor/batallas'
 import DetalleBatalla from './components/BatallaDetalle/detalleBatalla'
 import PostsContenedor from './components/PostsContenedor/postsContenedor'
 import Perfil from './components/PerfilUsuario/perfil'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-
   return (
     <>
-      <Nav/>
-      <Perfil/>
-      <Footer/>
+        <BrowserRouter>
+        <Nav/>
+          <Routes>
+            <Route path='/' element={<BatallasContenedor/>} />
+            <Route path='/perfil' element={<Perfil/>} />
+            <Route path='/detalle' element={<DetalleBatalla />} />
+            <Route path='/noticias' element={<PostsContenedor/>} />
+          </Routes>
+        </BrowserRouter>
+        <Footer/>
     </>
   )
 }

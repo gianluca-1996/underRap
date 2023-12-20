@@ -80,7 +80,7 @@ function Perfil(){
                                         <CheckCircleIcon color='primary'/>
                                     </Col>
                                     <Col>
-                                        <h4 className='usuarioInfoPerfil'>Organizador de eventos</h4>
+                                        <h4 className='usuarioInfoPerfil'>Rol: organizador</h4>
                                     </Col>
                                 </Row>
                                 :
@@ -89,7 +89,7 @@ function Perfil(){
                                         <CheckCircleIcon color='primary'/>
                                     </Col>
                                     <Col>
-                                        <h4 className='usuarioInfoPerfil'>Competidor</h4>
+                                        <h4 className='usuarioInfoPerfil'>Rol: competidor</h4>
                                     </Col>
                                 </Row>
                             }

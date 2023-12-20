@@ -70,6 +70,10 @@
     justify-content: center;
 }
 
+#nombreUsuarioPost{
+    text-decoration: underline;
+}
+
 
 @media (max-width: 500px){
     #rowFotoUser{
