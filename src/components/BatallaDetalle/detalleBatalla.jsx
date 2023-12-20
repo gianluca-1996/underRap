@@ -11,26 +11,19 @@ import Spinner from 'react-bootstrap/Spinner';
 import "./detalleBatalla.css"
 import { useEffect, useState } from 'react';
 import Boton from '../Boton/boton';
-
+import { useParams } from 'react-router';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import useFetch from '../hooks/use-fetch';
 
 
 function DetalleBatalla(){
 
-    const [batalla, setBatalla] = useState();
-
-    useEffect(() => {
-        setTimeout(() => {    
-            fetch('src/assets/data/evento.json')
-            .then(res => res.json())
-            .then(data => {setBatalla(data[3])})
-            .catch(error => {console.error('No se pudo leer el archivo JSON: ' + error)})
-        }, 4000);
-    }, []);
+    const param = useParams();
+    const eventoId = param.id;
+    const databatalla = useFetch('/src/assets/data/evento.json');
+    const batalla = databatalla.data ? databatalla.data[eventoId] : null;
 
     return(
         <Container id='detalleContenedor' fluid>
