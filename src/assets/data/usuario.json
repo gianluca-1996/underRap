@@ -15,8 +15,8 @@
         "seguidos": [
             {"id": 2}, {"id": 3}
         ],
-        "fotoPerfil": "src/assets/img/imagen2.jpg",
-        "portada": "src/assets/img/imagen1.jpg"
+        "fotoPerfil": "/src/assets/img/imagen2.jpg",
+        "portada": "/src/assets/img/imagen1.jpg"
     },
     {
         "id": 2,
@@ -34,8 +34,8 @@
         "seguidos": [
             {"id": 1}, {"id": 3}
         ],
-        "fotoPerfil": "src/assets/img/img3.png",
-        "portada": "src/assets/img/img4.png"
+        "fotoPerfil": "/src/assets/img/img3.png",
+        "portada": "/src/assets/img/img4.png"
     },
     {
         "id": 3,
@@ -48,12 +48,12 @@
         "correo": "gianluca.cambareri@outlook.com",
         "organizador": false,
         "seguidores": [
-            {"id": 1}, {"id": 2}
+            {"id": 1}
         ],
         "seguidos": [
             {"id": 1}, {"id": 2}
         ],
-        "fotoPerfil": "src/assets/img/img4.png",
-        "portada": "src/assets/img/img3.png"
+        "fotoPerfil": "/src/assets/img/img4.png",
+        "portada": "/src/assets/img/img3.png"
     }
 ]

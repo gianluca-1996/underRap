@@ -10,18 +10,25 @@ import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Post from '../PostsContenedor/Post/post'
 import useFetch from '../hooks/use-fetch';
-import "./perfil.css"
 import Boton from '../Boton/boton';
+import { useParams } from 'react-router';
+import "./perfil.css"
 
 
 
 function Perfil(){
 
-    const dataUser = useFetch('src/assets/data/usuario.json');
-    const dataPost = useFetch('src/assets/data/posts.json');
-    const usuario = dataUser.data ? dataUser.data[0] : null;
-    const posteos = dataPost.data ? dataPost.data.filter( (post) => post.usuarioId === usuario.id ) : null;
-    
+    const params = useParams();
+    const idUser = params.id;
+    const dataUser = useFetch('/src/assets/data/usuario.json');
+    const dataPost = useFetch('/src/assets/data/posts.json');
+    const usuario = dataUser.data ? dataUser.data[idUser] : null;
+    let posteos = null;
+
+    if(dataPost.data){
+        if(dataPost.data.some( (posteo) => posteo.usuarioId == usuario.id)) posteos = dataPost.data.filter( (post) => post.usuarioId == usuario.id )
+    }
+
     return(
         <Container fluid id='contenedorPerfil'>
             {
@@ -104,11 +111,13 @@ function Perfil(){
                         </Col>
                         <Col sm={8} id='colActividadPerfil'>
                             {
-                                posteos &&
+                                posteos ?
                                 <>
                                     <h2>Actividad</h2>
                                     {posteos.map((post => <Post key={post.id} post={post} columnas={12}/>))}
                                 </>
+                                :
+                                <h1>No hay actividad del usuario</h1>
                             }
                             {
                                 dataPost.error &&

@@ -8,7 +8,7 @@
         "texto": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus",
         "meGusta": 0,
         "comentarios": [],
-        "imagen": "src/assets/img/img4.png"
+        "imagen": "/src/assets/img/img4.png"
     },
     {
         "id": 2,
@@ -19,7 +19,7 @@
         "texto": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic cupiditate nostrum ipsum perferendis aut in itaque nisi quas odio temporibus placeat, labore laudantium aperiam, beatae error sed quam excepturi. Sequi!",
         "meGusta": 2,
         "comentarios": [],
-        "imagen": "src/assets/img/img3.png"
+        "imagen": "/src/assets/img/img3.png"
     },
     {
         "id": 3,
@@ -30,7 +30,7 @@
         "texto": "Este sabado se rapea en la plaza de Banfield!",
         "meGusta": 5,
         "comentarios": [],
-        "imagen": "src/assets/img/imagen2.jpg"
+        "imagen": "/src/assets/img/imagen2.jpg"
     },
     {
         "id": 4,
@@ -41,7 +41,7 @@
         "texto": "Este sabado se rapea en la plaza de Burzaco!",
         "meGusta": 1,
         "comentarios": [],
-        "imagen": "src/assets/img/img4.png"
+        "imagen": "/src/assets/img/img4.png"
     },
     {
         "id": 5,
@@ -52,6 +52,6 @@
         "texto": "Este sabado se rapea en la plaza de Adrogué!",
         "meGusta": 10,
         "comentarios": [],
-        "imagen": "src/assets/img/img3.png"
+        "imagen": "/src/assets/img/img3.png"
     }
 ]

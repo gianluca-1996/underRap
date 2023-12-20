@@ -12,12 +12,12 @@ function App() {
   return (
     <>
         <BrowserRouter>
-        <Nav/>
+          <Nav/>
           <Routes>
-            <Route path='/' element={<BatallasContenedor/>} />
-            <Route path='/perfil' element={<Perfil/>} />
+            <Route path='/' element={<BatallasContenedor />} />
+            <Route path="/perfil/:id" element={<Perfil />} />
             <Route path='/detalle' element={<DetalleBatalla />} />
-            <Route path='/noticias' element={<PostsContenedor/>} />
+            <Route path='/noticias' element={<PostsContenedor />} />
           </Routes>
         </BrowserRouter>
         <Footer/>
