@@ -5,28 +5,25 @@ import Boton from '../../Boton/boton';
 import Typography from '@mui/material/Typography';
 import "./batalla.css"
 
-function Batalla({batallas}){
+function Batalla({batalla}){
     return(
-        <>
-            {batallas.map((item) => 
-                <Card key={item.id} sx={{ width: '27rem', height:'43rem', textAlign:'center', padding:'1rem', margin:'3px' }} id='cardItem'>
-                    <CardMedia
-                    sx={{ height: '30rem' }}
-                    image={item.img}
-                    title={item.titulo}
-                    />
-                    <CardContent>
-                    <Typography gutterBottom className='descripcionCard' variant="h5" component="div">
-                        {item.titulo}
-                    </Typography>
-                    <Typography className='descripcionCard' variant="body2">
-                        {item.descripcion}
-                    </Typography>
-                    </CardContent>
-                    <Boton texto={'Mas Info'}/>
-                </Card>
-            )}
-        </>
+        <Card key={batalla.id} sx={{ width: '30vw', height:'60vh', textAlign:'center', padding:'1rem', margin:'3px' }} id='cardItem'>
+            <CardMedia
+            sx={{ height: '30vh' }}
+            image={batalla.img}
+            title={batalla.titulo}
+            id='cardMediaBatalla'
+            />
+            <CardContent>
+            <Typography gutterBottom className='descripcionCard' variant="h5" component="div">
+                {batalla.titulo}
+            </Typography>
+            <Typography className='descripcionCard' variant="body2">
+                {batalla.descripcion}
+            </Typography>
+            </CardContent>
+            <Boton texto={'Mas Info'}/>
+        </Card>
     );
 }
 

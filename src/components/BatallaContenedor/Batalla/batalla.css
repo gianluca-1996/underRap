@@ -1,9 +1,14 @@
 #cardItem{
-    margin-top: 5%;
-    box-shadow: 5px 5px 20px #EB4413;
-    background-color: black;
+    background-color: #eeeeee;
+    border-radius: 15px;
+    margin-top: 2%;
 }
 
 .descripcionCard{
-    color: #EB4413;
+    color: #212121;
+}
+
+#cardMediaBatalla{
+    border: 2px black solid;
+    border-radius: 15px;
 }

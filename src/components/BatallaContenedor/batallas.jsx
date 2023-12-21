@@ -1,4 +1,5 @@
 import Container from 'react-bootstrap/Container';
+import { Row } from 'react-bootstrap';
 import "./batallas.css"
 import Batalla from './Batalla/batalla';
 import { useState, useEffect } from 'react';
@@ -18,12 +19,16 @@ function BatallasContenedor(){
     }, []);
 
     return(
-        <div id='contenedor-batallas'>
-            {items && <Buscador/>}
-            <Container fluid id='batallaContainer'>
-                {items ? <Batalla batallas={items}/> : <Spinner className='spinBatallas' animation="grow"/>}
-            </Container>
-        </div>
+        <Container fluid id='batallaContainer'>
+            <Row className='RowContainer'>
+                {items && <Buscador/>}
+            </Row>
+            <Row className='RowContainer'>
+                {items ? 
+                items.map( (evento) => <Batalla key={evento.id} batalla={evento} /> ) 
+                : <Spinner className='spinBatallas' animation="grow"/>}
+            </Row>
+        </Container>
     );
 }
 

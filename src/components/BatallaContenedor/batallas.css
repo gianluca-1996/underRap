@@ -1,17 +1,15 @@
 #batallaContainer{
     min-height: 50rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     background-color: #110909;
+}
+
+.RowContainer{
+    padding: 2%;
+    justify-content: space-around;
 }
 
 .spinBatallas{
     background-color: #eeeeee;
     margin-top: 10%;
     margin-left: 50%;
-}
-
-#contenedor-batallas{
-    background-color: black;
 }
