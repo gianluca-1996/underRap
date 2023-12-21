@@ -3,9 +3,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Boton from '../../Boton/boton';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 import "./batalla.css"
 
 function Batalla({batalla}){
+
     return(
         <Card key={batalla.id} sx={{ width: '30vw', height:'60vh', textAlign:'center', padding:'1rem', margin:'3px' }} id='cardItem'>
             <CardMedia
@@ -22,7 +24,9 @@ function Batalla({batalla}){
                 {batalla.descripcion}
             </Typography>
             </CardContent>
-            <Boton texto={'Mas Info'}/>
+            <Link to={`/detalleEvento/${batalla.id}`}>
+                <Boton texto={'Mas Info'}/>
+            </Link>
         </Card>
     );
 }

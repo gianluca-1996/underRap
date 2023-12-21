@@ -15,7 +15,7 @@ function BatallasContenedor(){
             .then(response => response.json())
             .then(info => {setItems(info)})
             .catch(error => console.error('Error al leer el archivo JSON:', error));
-        }, 5000);
+        }, 1000);
     }, []);
 
     return(

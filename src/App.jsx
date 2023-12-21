@@ -14,9 +14,9 @@ function App() {
         <BrowserRouter>
           <Nav/>
           <Routes>
-            <Route path='/' element={<BatallasContenedor />} />
+            <Route path='/eventos' element={<BatallasContenedor />} />
             <Route path="/perfil/:id" element={<Perfil />} />
-            <Route path='/detalle/:id' element={<DetalleBatalla />} />
+            <Route path='/detalleEvento/:id' element={<DetalleBatalla />} />
             <Route path='/noticias' element={<PostsContenedor />} />
           </Routes>
         </BrowserRouter>

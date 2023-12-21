@@ -15,13 +15,14 @@ const Nav = () => {
                 <Col sm={4}>
                     <Row>
                         <Col>
-                            <h4 className='colLinks'>Detalle</h4>
+                            <Link to={"/eventos"}>
+                                <h4 className='colLinks'>Eventos</h4>
+                            </Link>
                         </Col>
                         <Col>
-                            <h4 className='colLinks'>Batallas</h4>
-                        </Col>
-                        <Col>
-                            <h4 className='colLinks'>Perfil</h4>
+                        <Link to={"/noticias"}>
+                            <h4 className='colLinks'>Noticias</h4>
+                        </Link>
                         </Col>
                     </Row>
                 </Col>

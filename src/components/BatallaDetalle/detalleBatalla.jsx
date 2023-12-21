@@ -23,7 +23,7 @@ function DetalleBatalla(){
     const param = useParams();
     const eventoId = param.id;
     const databatalla = useFetch('/src/assets/data/evento.json');
-    const batalla = databatalla.data ? databatalla.data[eventoId] : null;
+    const batalla = databatalla.data ? databatalla.data[eventoId - 1] : null;
 
     return(
         <Container id='detalleContenedor' fluid>
