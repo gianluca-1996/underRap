@@ -17,7 +17,7 @@ function App() {
             <Route path='/eventos' element={<BatallasContenedor />} />
             <Route path="/perfil/:id" element={<Perfil />} />
             <Route path='/detalleEvento/:id' element={<DetalleBatalla />} />
-            <Route path='/noticias' element={<PostsContenedor />} />
+            <Route path='/' element={<PostsContenedor />} />
           </Routes>
         </BrowserRouter>
         <Footer/>

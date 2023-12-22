@@ -25,7 +25,7 @@ function Perfil(){
     const usuario = dataUser.data ? dataUser.data[idUser] : null;
     let posteos = null;
 
-    if(dataPost.data){
+    if(dataPost.data && usuario){
         if(dataPost.data.some( (posteo) => posteo.usuarioId == usuario.id)) posteos = dataPost.data.filter( (post) => post.usuarioId == usuario.id )
     }
 

@@ -1,22 +1,15 @@
 import Container from 'react-bootstrap/Container';
 import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import "./batallas.css"
 import Batalla from './Batalla/batalla';
-import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import Buscador from '../Buscador/buscador';
+import useFetch from '../hooks/use-fetch';
 
 function BatallasContenedor(){
-    const [items, setItems] = useState(null); 
-
-    useEffect(() => {
-        setTimeout(() => {
-            fetch('src/assets/data/evento.json')
-            .then(response => response.json())
-            .then(info => {setItems(info)})
-            .catch(error => console.error('Error al leer el archivo JSON:', error));
-        }, 1000);
-    }, []);
+    const dataBatallas = useFetch('/src/assets/data/evento.json');
+    const items = dataBatallas.data ? dataBatallas.data : null;
 
     return(
         <Container fluid id='batallaContainer'>
@@ -24,9 +17,14 @@ function BatallasContenedor(){
                 {items && <Buscador/>}
             </Row>
             <Row className='RowContainer'>
-                {items ? 
-                items.map( (evento) => <Batalla key={evento.id} batalla={evento} /> ) 
-                : <Spinner className='spinBatallas' animation="grow"/>}
+                {
+                items ? 
+                items.map( (evento) => <Col sm={4} key={evento.id}><Batalla batalla={evento} /> </Col>) 
+                :
+                <Col>
+                    <Spinner className='spinBatallas' animation="grow"/>
+                </Col> 
+                }
             </Row>
         </Container>
     );

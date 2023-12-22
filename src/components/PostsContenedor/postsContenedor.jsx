@@ -1,25 +1,17 @@
-import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
 import Post from './Post/post';
 import "./postsContenedor.css"
+import useFetch from '../hooks/use-fetch';
 
 function PostsContenedor(){
 
-    const [items, setItems] = useState(null);
-
-    useEffect(() => {
-        setTimeout(() => {
-            fetch('src/assets/data/posts.json')
-            .then(response => response.json())
-            .then(info => {setItems(info)})
-            .catch(error => console.error('Error al leer el archivo JSON:', error));
-        }, 5000);
-    }, []);
+    const items = useFetch('/src/assets/data/posts.json');
+    const posteos = items.data ? items.data : null
 
     return(
         <Container fluid id='postsContainer'>
-            {items ? items.map((data) => <Post post={data} key={data.id}/>) : <Spinner className='spinBatallas' animation="grow"/> } 
+            {posteos ? posteos.map((data) => <Post post={data} key={data.id}/>) : <Spinner className='spinBatallas' animation="grow"/> } 
         </Container>
     )
 }
