@@ -1,0 +1,36 @@
+#containerFormEvento{
+    min-height: 130vh;
+    background-color: #212121;
+}
+
+.rowInputForm{
+    border-radius: 4px;
+    margin: 2%;
+}
+
+#colFormEvento{  
+    background-color: aliceblue;
+    border-radius: 15px;
+}
+
+#rowFormEvento{
+    padding-top: 5%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#formEvento{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+#rowBtnCrearEvento{
+    margin: 2%;
+}
+
+#h1NuevoEvento{
+    color: aliceblue;
+    text-align: center;
+    margin-top: 5%;
+    text-decoration: underline;
+}

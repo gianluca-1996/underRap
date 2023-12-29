@@ -6,6 +6,7 @@ import BatallasContenedor from './components/BatallaContenedor/batallas'
 import DetalleBatalla from './components/BatallaDetalle/detalleBatalla'
 import PostsContenedor from './components/PostsContenedor/postsContenedor'
 import Perfil from './components/PerfilUsuario/perfil'
+import FormEvento from './components/FormEvento/formEvento'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -14,10 +15,11 @@ function App() {
         <BrowserRouter>
           <Nav/>
           <Routes>
+            <Route path='/' element={<PostsContenedor />} />
             <Route path='/eventos' element={<BatallasContenedor />} />
             <Route path="/perfil/:id" element={<Perfil />} />
             <Route path='/detalleEvento/:id' element={<DetalleBatalla />} />
-            <Route path='/' element={<PostsContenedor />} />
+            <Route path='/nuevoEvento' element={<FormEvento />} />
           </Routes>
         </BrowserRouter>
         <Footer/>

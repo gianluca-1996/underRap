@@ -12,6 +12,7 @@ import Post from '../PostsContenedor/Post/post'
 import useFetch from '../hooks/use-fetch';
 import Boton from '../Boton/boton';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import "./perfil.css"
 
 
@@ -50,7 +51,9 @@ function Perfil(){
                         {
                             usuario.organizador && 
                             <Col sm={2}>
-                                <Boton texto={'Crear Evento'}/>
+                                <Link to={"/nuevoEvento"}>
+                                    <Boton texto={'Crear Evento'}/>
+                                </Link>
                             </Col>
                         }
                     </Row>
