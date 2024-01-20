@@ -50,11 +50,19 @@ function Perfil(){
                         </Col>
                         {
                             usuario.organizador && 
-                            <Col sm={2}>
-                                <Link to={"/nuevoEvento"}>
-                                    <Boton texto={'Crear Evento'}/>
-                                </Link>
-                            </Col>
+                            ( false ? 
+                                <Col sm={2}>
+                                    <Link to={"/iniciarEvento"}>
+                                        <Boton texto={'Iniciar Evento'}/>
+                                    </Link>
+                                </Col>
+                                :
+                                <Col sm={2}>
+                                    <Link to={"/nuevoEvento"}>
+                                        <Boton texto={'Crear Evento'}/>
+                                    </Link>
+                                </Col>
+                            )
                         }
                     </Row>
                     <Row id='rowInfoUsuario'>

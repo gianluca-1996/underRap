@@ -11,7 +11,12 @@ function FormEvento() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {console.log(data)};
+  const onSubmit = (data) => {
+    /*TODO:
+    guardar los datos y redireccionar al usuario a su perfil
+    */
+    console.log(data);
+  };
 
   return (
     <Container fluid id="containerFormEvento">
