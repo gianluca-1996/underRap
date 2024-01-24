@@ -1,0 +1,36 @@
+#containerFormLogin{
+    min-height: 130vh;
+    background-color: #212121;
+}
+
+#h1IniciarSesion{
+    color: aliceblue;
+    text-align: center;
+    margin-top: 5%;
+    text-decoration: underline;
+}
+
+#rowFormLogin{
+    padding-top: 5%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#colFormLogin{  
+    background-color: aliceblue;
+    border-radius: 15px;
+}
+
+#formLogin{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.rowInputForm{
+    border-radius: 4px;
+    margin: 2%;
+}
+
+#rowBtnIngresar{
+    margin: 2%;
+}
