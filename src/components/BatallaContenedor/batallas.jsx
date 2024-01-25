@@ -5,11 +5,30 @@ import "./batallas.css"
 import Batalla from './Batalla/batalla';
 import Spinner from 'react-bootstrap/Spinner';
 import Buscador from '../Buscador/buscador';
-import useFetch from '../hooks/use-fetch';
+import { useEffect, useContext, useState } from "react";
+import UsuarioContext from "../UsuarioContext/usuarioContext";
+import { useNavigate } from 'react-router-dom';
 
 function BatallasContenedor(){
-    const dataBatallas = useFetch('/src/assets/data/evento.json');
-    const items = dataBatallas.data ? dataBatallas.data : null;
+    const [items, setItems] = useState();
+    const userCtx = useContext(UsuarioContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(userCtx.usuarioActual){
+            fetch('/src/assets/data/evento.json')
+            .then((result) => result.json())
+            .then((data) => {
+                setItems(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+        else{
+          navigate('/login', {replace: true});
+        }
+      }, [userCtx]);
 
     return(
         <Container fluid id='batallaContainer'>

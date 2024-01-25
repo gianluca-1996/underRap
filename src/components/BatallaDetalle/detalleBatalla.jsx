@@ -8,22 +8,39 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
-import "./detalleBatalla.css"
-import { useEffect, useState } from 'react';
 import Boton from '../Boton/boton';
 import { useParams } from 'react-router';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import useFetch from '../hooks/use-fetch';
+import { useEffect, useContext, useState } from "react";
+import UsuarioContext from "../UsuarioContext/usuarioContext";
+import { useNavigate } from 'react-router-dom';
+import "./detalleBatalla.css"
 
 
 function DetalleBatalla(){
-
+    const navigate = useNavigate();
+    const userCtx = useContext(UsuarioContext);
     const param = useParams();
     const eventoId = param.id;
-    const databatalla = useFetch('/src/assets/data/evento.json');
-    const batalla = databatalla.data ? databatalla.data[eventoId - 1] : null;
+    const [batalla, setBatalla] = useState()//databatalla.data ? databatalla.data[eventoId - 1] : null;
+
+    useEffect(() => {
+        if(userCtx.usuarioActual){
+            fetch('/src/assets/data/evento.json')
+            .then((result) => result.json())
+            .then((data) => {
+                setBatalla(data[eventoId - 1]);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+        else{
+          navigate('/login', {replace: true});
+        }
+      }, [userCtx]);
 
     return(
         <Container id='detalleContenedor' fluid>

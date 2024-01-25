@@ -11,35 +11,42 @@ import Row from "react-bootstrap/Row";
 import Post from "../PostsContenedor/Post/post";
 import useFetch from "../hooks/use-fetch";
 import Boton from "../Boton/boton";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import app from "../Firebase/config.js";
+import { Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
-import "./perfil.css";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import UsuarioContext from "../UsuarioContext/usuarioContext";
+import { useNavigate } from 'react-router-dom';
+import "./perfil.css";
 
 function Perfil() {
+  const userCtx = useContext(UsuarioContext);
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
-  const params = useParams();
-  const idUser = params.id;
+  const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
   const [posteos, setPosteos] = useState(null);
 
   useEffect(() => {
-    const docRefUsuario = doc(db, "Usuario", idUser);
-    const docRefActividad = doc(db, "Actividad", idUser);
-    getDoc(docRefUsuario)
-      .then((user) => {
-        setUsuario(user.data());
-        
+    if(userCtx.usuarioActual){
+      const docRefUsuario = doc(db, "Usuario", userCtx.usuarioActual.uid);
+      //const docRefActividad = doc(db, "Actividad", idUser);
+      getDoc(docRefUsuario)
+        .then((user) => {
+          setUsuario(user.data());
+          
+        })
+        .catch((error) => {
+          console.log("Error...", error);
+        });
+    }
+    else{
+      navigate('/login', {replace: true});
+    }
+  }, [userCtx]);
 
-      })
-      .catch((error) => {
-        console.log("Error...", error);
-      });
-  }, []);
 
   return (
     <Container fluid id="contenedorPerfil">

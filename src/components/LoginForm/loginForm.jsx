@@ -5,32 +5,37 @@ import TextField from "@mui/material/TextField";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../Firebase/config.js"
 import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from "react";
+import UsuarioContext from "../UsuarioContext/usuarioContext";
 import "./loginForm.css";
 
 const auth = getAuth();
 
 function LoginForm() {
+  const navigate = useNavigate();
+  const userCtx = useContext(UsuarioContext);
+  const [passIncorrecto, setPassIncorrecto] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   
-  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(auth, data.mail, data.password)
       .then((userCredential) => {
-        // Signed in
-        console.log(userCredential);
-        navigate('/');
+        userCtx.actualizar(userCredential.user);
+        navigate('/eventos', {replace: true});
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode + ' ' + errorMessage);
+        setPassIncorrecto(true);
       });
   };
+
 
   return (
     <Container fluid id="containerFormLogin">
@@ -76,6 +81,7 @@ function LoginForm() {
               {errors.password?.type === "minLength" && (
                 <p role="alert">Debe tener 5 caracteres como minimo</p>
               )}
+              {passIncorrecto && <p>Contraseña incorrecta. Intente nuevamente</p>}
             </Row>
             <Row id="rowBtnIngresar">
               <Boton texto={"Ingresar"} submit="submit" />
