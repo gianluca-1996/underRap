@@ -2,18 +2,14 @@ import Boton from "../Boton/boton";
 import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from "../Firebase/config.js"
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState } from "react";
-import UsuarioContext from "../UsuarioContext/usuarioContext";
+import { useState, useEffect} from "react";
 import "./loginForm.css";
-
-const auth = getAuth();
 
 function LoginForm() {
   const navigate = useNavigate();
-  const userCtx = useContext(UsuarioContext);
+  const auth = getAuth();
   const [passIncorrecto, setPassIncorrecto] = useState(false);
   const {
     register,
@@ -22,10 +18,22 @@ function LoginForm() {
   } = useForm();
   
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user){
+        navigate('/eventos');
+      }
+      else{
+        navigate('/login');
+      }
+    })
+
+    return () => unsubscribe();
+  }, []);
+
   const onSubmit = (data) => {
     signInWithEmailAndPassword(auth, data.mail, data.password)
       .then((userCredential) => {
-        userCtx.actualizar(userCredential.user);
         navigate('/eventos', {replace: true});
       })
       .catch((error) => {

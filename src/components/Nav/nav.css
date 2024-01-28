@@ -5,6 +5,10 @@
     color: #212121;
 }
 
+#rowNav{
+    justify-content: space-between;
+}
+
 .colSesion{
     text-align: end;
 }

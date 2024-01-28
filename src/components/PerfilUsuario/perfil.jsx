@@ -16,13 +16,12 @@ import { Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useContext } from "react";
-import UsuarioContext from "../UsuarioContext/usuarioContext";
 import { useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "./perfil.css";
 
 function Perfil() {
-  const userCtx = useContext(UsuarioContext);
+  const auth = getAuth();
   // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
   const navigate = useNavigate();
@@ -30,22 +29,25 @@ function Perfil() {
   const [posteos, setPosteos] = useState(null);
 
   useEffect(() => {
-    if(userCtx.usuarioActual){
-      const docRefUsuario = doc(db, "Usuario", userCtx.usuarioActual.uid);
-      //const docRefActividad = doc(db, "Actividad", idUser);
-      getDoc(docRefUsuario)
-        .then((user) => {
-          setUsuario(user.data());
-          
-        })
-        .catch((error) => {
-          console.log("Error...", error);
-        });
-    }
-    else{
-      navigate('/login', {replace: true});
-    }
-  }, [userCtx]);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user){
+          const docRefUsuario = doc(db, "Usuario", user.uid);
+          //const docRefActividad = doc(db, "Actividad", idUser);
+          getDoc(docRefUsuario)
+            .then((user) => {
+              setUsuario(user.data());
+            })
+            .catch((error) => {
+              console.log("Error...", error);
+            });
+      }
+      else{
+        navigate('/login', {replace: true});
+      }
+    })
+
+    return () => unsubscribe();
+  }, []);
 
 
   return (

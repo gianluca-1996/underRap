@@ -13,21 +13,24 @@ import { useParams } from 'react-router';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { useEffect, useContext, useState } from "react";
-import UsuarioContext from "../UsuarioContext/usuarioContext";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import "./detalleBatalla.css"
 
 
 function DetalleBatalla(){
+    const auth = getAuth();
     const navigate = useNavigate();
-    const userCtx = useContext(UsuarioContext);
     const param = useParams();
     const eventoId = param.id;
     const [batalla, setBatalla] = useState()//databatalla.data ? databatalla.data[eventoId - 1] : null;
 
+
     useEffect(() => {
-        if(userCtx.usuarioActual){
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (user){
             fetch('/src/assets/data/evento.json')
             .then((result) => result.json())
             .then((data) => {
@@ -36,11 +39,15 @@ function DetalleBatalla(){
             .catch((error) => {
                 console.log(error);
             })
-        }
-        else{
-          navigate('/login', {replace: true});
-        }
-      }, [userCtx]);
+          }
+          else{
+            navigate('/login');
+          }
+        })
+    
+        return () => unsubscribe();
+      }, []);
+
 
     return(
         <Container id='detalleContenedor' fluid>

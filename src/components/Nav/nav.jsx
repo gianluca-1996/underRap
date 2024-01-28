@@ -2,50 +2,49 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import app from "../Firebase/config.js";
-import UsuarioContext from "../UsuarioContext/usuarioContext";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./nav.css";
 
-const auth = getAuth();
-
 const Nav = () => {
-  const userCtx = useContext(UsuarioContext);
+  const auth = getAuth();
   const navigate = useNavigate();
   const [usuarioLogueado, setUsuarioLogueado] = useState();
   const [nombreUsuario, setNombreUsuario] = useState(null);
   const db = getFirestore(app);
 
   useEffect(() => {
-    if(userCtx.usuarioActual){
-      const docRefUsuario = doc(db, "Usuario", userCtx.usuarioActual.uid);
-      getDoc(docRefUsuario)
-      .then((usuarioInfo) => {
-        setUsuarioLogueado(usuarioInfo.data());
-        setNombreUsuario(usuarioInfo.data().nombre);
-      })
-      .catch((error) => {
-        console.log("Error en nav", error);
-      });
-    }
-  }, [userCtx]);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const docRefUsuario = doc(db, "Usuario", user.uid);
+        getDoc(docRefUsuario)
+          .then((usuarioInfo) => {
+            setUsuarioLogueado(usuarioInfo.data());
+            setNombreUsuario(usuarioInfo.data().nombre);
+          })
+          .catch((error) => {
+            console.log("Error en nav", error);
+          });
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const onClickCierraSesion = () => {
     auth.signOut().then(() => {
-      userCtx.actualizar(null);
       setUsuarioLogueado(null);
-      navigate('/login');
+      navigate("/login");
     });
   };
 
   return (
     <Container fluid className="navContainer">
-      <Row>
-        <Col sm={4} id="tituloApp">
+      <Row id="rowNav">
+        <Col sm={2} id="tituloApp">
           <h1>underRap</h1>
         </Col>
         {usuarioLogueado ? (
@@ -62,21 +61,17 @@ const Nav = () => {
                     <h4 className="colLinks">Noticias</h4>
                   </Link>
                 </Col>
+                <Col>
+                  <Link to={"/perfil"}>
+                    <h4 className="colLinks">Perfil</h4>
+                  </Link>
+                </Col>
               </Row>
-            </Col>
-            <Col sm={4}>
-              <Row>
-                <Link to={'/perfil'}>
-                  <h4 className="colSesion">Perfil</h4>
-                </Link>
-              </Row>
-            </Col>
-            <Col sm={4}>
-              <Row>
+              <Col>
                 <h4>Bienvenido {nombreUsuario}</h4>
-              </Row>
+              </Col>
             </Col>
-            <Col sm={4}>
+            <Col sm={2}>
               <Row>
                 <button onClick={onClickCierraSesion}>
                   <h4 className="colSesion">Cerrar Sesion</h4>

@@ -3,22 +3,28 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import { useEffect, useContext, useState } from "react";
-import UsuarioContext from "../UsuarioContext/usuarioContext";
 import { useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "./formEvento.css";
 
 function FormEvento() {
-  const userCtx = useContext(UsuarioContext);
+  const auth = getAuth();
   const navigate = useNavigate();
   const [muestraContenido, setMuestraContenido] = useState(false);
 
   useEffect(() => {
-    if (userCtx.usuarioActual) {
-      setMuestraContenido(true);
-    } else {
-      navigate("/login", { replace: true });
-    }
-  }, [userCtx]);
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user){
+        setMuestraContenido(true);
+      }
+      else{
+        navigate('/login', {replace: true});
+      }
+    })
+
+    return () => unsubscribe();
+  }, []);
 
   const {
     register,
