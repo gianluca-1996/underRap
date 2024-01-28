@@ -5,7 +5,7 @@
     color: #212121;
 }
 
-#rowNav{
+.rowNavIn{
     justify-content: space-between;
 }
 
@@ -15,6 +15,10 @@
 
 .colLinks{
     padding-top: 1rem;
+}
+
+.link{
+    text-decoration: none;
 }
 
 #tituloApp{

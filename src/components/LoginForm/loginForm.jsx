@@ -1,3 +1,4 @@
+import Spinner from "react-bootstrap/Spinner";
 import Boton from "../Boton/boton";
 import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,8 @@ function LoginForm() {
   const navigate = useNavigate();
   const auth = getAuth();
   const [passIncorrecto, setPassIncorrecto] = useState(false);
+  const [muestraForm, setMuestraForm] = useState(false);
+  
   const {
     register,
     handleSubmit,
@@ -20,12 +23,8 @@ function LoginForm() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user){
-        navigate('/eventos');
-      }
-      else{
-        navigate('/login');
-      }
+      if (user) navigate('/eventos');
+      else  setMuestraForm(true);
     })
 
     return () => unsubscribe();
@@ -33,7 +32,7 @@ function LoginForm() {
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(auth, data.mail, data.password)
-      .then((userCredential) => {
+      .then(() => {
         navigate('/eventos', {replace: true});
       })
       .catch((error) => {
@@ -47,7 +46,9 @@ function LoginForm() {
 
   return (
     <Container fluid id="containerFormLogin">
-      <Row>
+      {muestraForm ? 
+      (<>
+        <Row>
         <h1 id="h1IniciarSesion">Iniciar Sesion</h1>
       </Row>
       <Row id="rowFormLogin">
@@ -97,8 +98,11 @@ function LoginForm() {
           </form>
         </Col>
       </Row>
+      </>) : 
+      (<Spinner className="spinBatallas" animation="grow" />)
+      }
+      
     </Container>
   );
 }
-
 export default LoginForm;
