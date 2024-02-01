@@ -10,24 +10,18 @@ import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { grey } from '@mui/material/colors';
 import "./accountMenu.css"
 
 export default function AccountMenu({ auth, isLog, logOutHandle }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  console.log(isLog);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const onClickCierraSesion = () => {
-    auth.signOut().then(() => {
-      setUsuarioLogueado(null);
-      navigate("/login");
-    });
   };
 
   return (
@@ -42,7 +36,7 @@ export default function AccountMenu({ auth, isLog, logOutHandle }) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <AccountCircleIcon sx={{ color: grey[200], width: 32, height: 32 }} />
           </IconButton>
         </Tooltip>
       </Box>
@@ -84,8 +78,8 @@ export default function AccountMenu({ auth, isLog, logOutHandle }) {
         >
           <MenuItem onClick={handleClose}>
             <Avatar />
-            <Link to={"/perfil"} className="link">
-              <h4 className="colLinks">Perfil</h4>
+            <Link to={"/perfil"} className="linkMenu">
+              Perfil
             </Link>
           </MenuItem>
           <MenuItem onClick={handleClose}>
@@ -145,7 +139,7 @@ export default function AccountMenu({ auth, isLog, logOutHandle }) {
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
-            <Link to={`/login`} className="link">
+            <Link to={`/login`} className="linkMenu">
               Ingresar
             </Link>
           </MenuItem>
@@ -153,7 +147,9 @@ export default function AccountMenu({ auth, isLog, logOutHandle }) {
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
-            Crear Cuenta
+            <Link to={`/nuevaCuenta`} className="linkMenu">
+              Crear Cuenta
+            </Link>
           </MenuItem>
         </Menu>
       )}

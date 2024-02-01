@@ -1,10 +1,8 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import app from "../Firebase/config.js";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AccountMenu from "../AccountMenu/accountMenu.jsx";
@@ -14,12 +12,11 @@ const Nav = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const [usuarioLogueado, setUsuarioLogueado] = useState(null);
-  const db = getFirestore(app);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUsuarioLogueado(true);
+        setUsuarioLogueado(user);
       }
     });
 
@@ -37,7 +34,7 @@ const Nav = () => {
     <Container fluid className="navContainer">
       <Row className="rowNavIn">
         <Col sm={2} id="tituloApp">
-          <h1>underRap</h1>
+          <h1>undeRapp</h1>
         </Col>
         {usuarioLogueado ? (
           <>
@@ -62,11 +59,19 @@ const Nav = () => {
                 logOutHandle={onClickCierraSesion}
               />
             </Col>
+            <Row>
+              {usuarioLogueado?.email && <p>{usuarioLogueado.email}</p>}
+            </Row>
           </>
         ) : (
-          <Col sm={1}>
-            <AccountMenu auth={auth} isLog={usuarioLogueado ? true : false} />
-          </Col>
+          <>
+            <Col sm={1}>
+              <AccountMenu auth={auth} isLog={usuarioLogueado ? true : false} />
+            </Col>
+            <Row>
+              {usuarioLogueado?.email && <p>{usuarioLogueado.email}</p>}
+            </Row>
+          </>
         )}
       </Row>
     </Container>

@@ -1,8 +1,8 @@
 .navContainer{
-    background-color: #eeeeee;
+    background-color: #424242 ;
     text-align: center;
     padding-top: 1rem;
-    color: #212121;
+    color: #eeeeee;
 }
 
 .rowNavIn{
@@ -19,6 +19,7 @@
 
 .link{
     text-decoration: none;
+    color: #eeeeee;
 }
 
 #tituloApp{

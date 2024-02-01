@@ -8,6 +8,7 @@ import PostsContenedor from "./components/PostsContenedor/postsContenedor";
 import Perfil from "./components/PerfilUsuario/perfil";
 import FormEvento from "./components/FormEvento/formEvento";
 import LoginForm from "./components/LoginForm/loginForm";
+import NuevoUsuarioForm from "./components/nuevoUsuarioForm/nuevoUsuarioForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/detalleEvento/:id" element={<DetalleBatalla />} />
           <Route path="/nuevoEvento" element={<FormEvento />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/nuevaCuenta" element={<NuevoUsuarioForm />} />
         </Routes>
         <Footer />
       </BrowserRouter>

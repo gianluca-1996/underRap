@@ -69,12 +69,7 @@ function Perfil() {
                 AKA: "{usuario.aka}"
               </h2>
             </Col>
-            <Col sm={6}>
-              <h2 className="usuarioInfoPerfil tituloAkaUsuario">
-                Seguidores: {usuario.seguidores.length} - Seguidos: {usuario.seguidos.length}
-              </h2>
-            </Col>
-            {usuario.organizador &&
+            {usuario.rol === 'organizador' &&
               (false ? (
                 <Col sm={2}>
                   <Link to={"/iniciarEvento"}>
@@ -96,9 +91,10 @@ function Perfil() {
                   <AssignmentIndIcon color="primary" />
                 </Col>
                 <Col>
-                  <h4 className="usuarioInfoPerfil">
-                    {usuario.nombre} {usuario.apellido}
-                  </h4>
+                  <h4 className="usuarioInfoPerfil">Seguidores: {usuario.seguidores.length}</h4>
+                </Col>
+                <Col>
+                  <h4 className="usuarioInfoPerfil">Seguidos: {usuario.seguidos.length}</h4>
                 </Col>
               </Row>
               <Row>
@@ -109,21 +105,13 @@ function Perfil() {
                   <h4 className="usuarioInfoPerfil">{usuario.ciudad}</h4>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={2}>
-                  <CalendarMonthIcon color="primary" />
-                </Col>
-                <Col>
-                  <h4 className="usuarioInfoPerfil">{usuario.nacimiento}</h4>
-                </Col>
-              </Row>
-              {usuario.organizador ? (
+              {usuario.rol === 'organizador' ? (
                 <Row>
                   <Col xs={2}>
                     <CheckCircleIcon color="primary" />
                   </Col>
                   <Col>
-                    <h4 className="usuarioInfoPerfil">Rol: organizador</h4>
+                    <h4 className="usuarioInfoPerfil">Organizador</h4>
                   </Col>
                 </Row>
               ) : (
@@ -132,7 +120,7 @@ function Perfil() {
                     <CheckCircleIcon color="primary" />
                   </Col>
                   <Col>
-                    <h4 className="usuarioInfoPerfil">Rol: competidor</h4>
+                    <h4 className="usuarioInfoPerfil">Competidor</h4>
                   </Col>
                 </Row>
               )}

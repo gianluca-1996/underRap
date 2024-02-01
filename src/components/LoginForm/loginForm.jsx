@@ -62,7 +62,7 @@ function LoginForm() {
                 className="inputFormLogin"
                 {...register("mail", {
                   required: true,
-                  pattern: /^[^s@]+@[^s@]+.[^s@]+$/,
+                  pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 })}
               />
               {errors.mail?.type === "required" && (
