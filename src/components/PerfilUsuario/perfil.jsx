@@ -13,11 +13,19 @@ import useFetch from "../hooks/use-fetch";
 import Boton from "../Boton/boton";
 import app from "../Firebase/config.js";
 import { Link } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  query,
+  where,
+  getDocs,
+  collection
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import PostNuevoForm from "../PostNuevoForm/postNuevoForm.jsx";
 import "./perfil.css";
 
 function Perfil() {
@@ -27,28 +35,47 @@ function Perfil() {
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
   const [posteos, setPosteos] = useState(null);
+  const [uid, setUid] = useState();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user){
-          const docRefUsuario = doc(db, "Usuario", user.uid);
-          //const docRefActividad = doc(db, "Actividad", idUser);
-          getDoc(docRefUsuario)
-            .then((user) => {
-              setUsuario(user.data());
-            })
-            .catch((error) => {
-              console.log("Error...", error);
-            });
+      if (user) {
+        const docRefUsuario = doc(db, "Usuario", user.uid);
+        //const docRefActividad = doc(db, "Actividad", idUser);
+        getDoc(docRefUsuario)
+          .then((usuarioRef) => {
+            setUid(user.uid);
+            setUsuario(usuarioRef.data());
+            obtenerPosteosUsuario(user.uid);
+          })
+          .catch((error) => {
+            console.log("Error...", error);
+          });
+      } else {
+        navigate("/login", { replace: true });
       }
-      else{
-        navigate('/login', {replace: true});
-      }
-    })
+    });
 
     return () => unsubscribe();
   }, []);
 
+  const obtenerPosteosUsuario = (uid) => {
+    const q = query(collection(db, "Noticias"), where("usuarioId", "==", uid));
+    const posteosColeccion = [];
+
+    getDocs(q)
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        //console.log(doc.id, " => ", doc.data());
+        posteosColeccion.push(doc);
+      });
+
+      setPosteos(posteosColeccion);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  };
 
   return (
     <Container fluid id="contenedorPerfil">
@@ -69,7 +96,7 @@ function Perfil() {
                 AKA: "{usuario.aka}"
               </h2>
             </Col>
-            {usuario.rol === 'organizador' &&
+            {usuario.rol === "organizador" &&
               (false ? (
                 <Col sm={2}>
                   <Link to={"/iniciarEvento"}>
@@ -91,10 +118,14 @@ function Perfil() {
                   <AssignmentIndIcon color="primary" />
                 </Col>
                 <Col>
-                  <h4 className="usuarioInfoPerfil">Seguidores: {usuario.seguidores.length}</h4>
+                  <h4 className="usuarioInfoPerfil">
+                    Seguidores: {usuario.seguidores.length}
+                  </h4>
                 </Col>
                 <Col>
-                  <h4 className="usuarioInfoPerfil">Seguidos: {usuario.seguidos.length}</h4>
+                  <h4 className="usuarioInfoPerfil">
+                    Seguidos: {usuario.seguidos.length}
+                  </h4>
                 </Col>
               </Row>
               <Row>
@@ -105,7 +136,7 @@ function Perfil() {
                   <h4 className="usuarioInfoPerfil">{usuario.ciudad}</h4>
                 </Col>
               </Row>
-              {usuario.rol === 'organizador' ? (
+              {usuario.rol === "organizador" ? (
                 <Row>
                   <Col xs={2}>
                     <CheckCircleIcon color="primary" />
@@ -134,11 +165,26 @@ function Perfil() {
               </Row>
             </Col>
             <Col sm={8} id="colActividadPerfil">
+              <Container
+                fluid
+                style={{
+                  background: "white",
+                  borderRadius: "15px",
+                  marginTop: "2%",
+                }}
+              >
+                <PostNuevoForm
+                  handlePosteos={obtenerPosteosUsuario}
+                  uid={uid}
+                  aka={usuario.aka}
+                />
+              </Container>
+
               {posteos ? (
                 <>
                   <h2>Actividad</h2>
                   {posteos.map((post) => (
-                    <Post key={post.id} post={post} columnas={12} />
+                    <Post key={post.id} post={post.data()} columnas={12} />
                   ))}
                 </>
               ) : (
@@ -148,9 +194,9 @@ function Perfil() {
             </Col>
           </Row>
         </>
-      ) 
-      : 
-      (<Spinner className="spinBatallas" animation="grow" />)}
+      ) : (
+        <Spinner className="spinBatallas" animation="grow" />
+      )}
     </Container>
   );
 }

@@ -58,8 +58,8 @@ function NuevoUsuarioForm() {
           fotoPerfil: '',
           rol: data.rol,
           portada: '',
-          seguidores: 0,
-          seguidos: 0
+          seguidores: [],
+          seguidos: []
         })
         .then(() => {
           navigate("/", { replace: true });

@@ -14,7 +14,7 @@ function PostsContenedor() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        fetch("/src/assets/data/posts.json")
+        /*fetch("/src/assets/data/posts.json")
           .then((result) => result.json())
           .then((data) => {
             setPosteos(data);
@@ -22,6 +22,7 @@ function PostsContenedor() {
           .catch((error) => {
             console.log(error);
           });
+          */
       }
       else{
         navigate('login');
