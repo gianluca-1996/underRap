@@ -24,7 +24,7 @@ function Post({ post, columnas = 6 }) {
 
   const fechaPost = new Date(post.fechaHora.toDate());
 
-  // Supongamos que tienes la fecha de creación del posteo en formato ISO
+  // fecha de creación del posteo en formato ISO
   const fechaCreacionISO = fechaPost.toISOString();
 
   // Convierte la cadena ISO a objeto Date

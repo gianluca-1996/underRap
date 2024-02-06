@@ -6,9 +6,11 @@ import TextField from "@mui/material/TextField";
 import { getFirestore, doc, collection, addDoc, Timestamp } from "firebase/firestore";
 import app from "../Firebase/config";
 import "./postNuevoForm.css";
+import { useState } from "react";
 
 function PostNuevoForm({ handlePosteos, uid, aka }) {
   const db = getFirestore(app);
+  const [comentario, setComentario] = useState("");
   const {
     register,
     handleSubmit,
@@ -26,12 +28,17 @@ function PostNuevoForm({ handlePosteos, uid, aka }) {
       comentarios: []
     }
     addDoc(collection(db, "Noticias"), post)
-      .then((documento) => {
+      .then(() => {
         handlePosteos(uid);
+        setComentario("");
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const onChangeComent = (e) => {
+    setComentario(e.target.value);
   };
 
   return (
@@ -44,8 +51,10 @@ function PostNuevoForm({ handlePosteos, uid, aka }) {
             label="¿Que tienes en mente?"
             variant="outlined"
             className="inputFormLogin"
+            value={comentario}
             {...register("textoPost", {
               required: true,
+              onChange: onChangeComent
             })}
           />
           {errors.textoPost?.type === "required" && (

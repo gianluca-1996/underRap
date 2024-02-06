@@ -1,7 +1,6 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import Container from "react-bootstrap/Container";
@@ -9,7 +8,6 @@ import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 import Row from "react-bootstrap/Row";
 import Post from "../PostsContenedor/Post/post";
-import useFetch from "../hooks/use-fetch";
 import Boton from "../Boton/boton";
 import app from "../Firebase/config.js";
 import { Link } from "react-router-dom";
@@ -20,7 +18,8 @@ import {
   query,
   where,
   getDocs,
-  collection
+  collection,
+  orderBy
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +59,7 @@ function Perfil() {
   }, []);
 
   const obtenerPosteosUsuario = (uid) => {
-    const q = query(collection(db, "Noticias"), where("usuarioId", "==", uid));
+    const q = query(collection(db, "Noticias"), where("usuarioId", "==", uid), orderBy('fechaHora', 'desc'));
     const posteosColeccion = [];
 
     getDocs(q)
