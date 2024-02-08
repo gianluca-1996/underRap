@@ -74,6 +74,9 @@
     text-decoration: underline;
 }
 
+#rowFotoUser{
+    justify-content: space-between;
+}
 
 @media (max-width: 500px){
     #rowFotoUser{

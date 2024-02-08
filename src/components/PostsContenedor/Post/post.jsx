@@ -9,15 +9,20 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AddCommentIcon from "@mui/icons-material/AddComment";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { useState } from "react";
 import Boton from "../../Boton/boton";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import { formatDistanceToNow, parseISO } from "date-fns";
+import { doc, deleteDoc, getFirestore } from "firebase/firestore";
+import app from "../../Firebase/config";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./post.css";
 
-function Post({ post, columnas = 6 }) {
+function Post({ post, idPost, columnas = 6, obtenerPosteosUsuario, uid }) {
+  const db = getFirestore(app);
   const [muestraComent, setMuestraComent] = useState(true);
   const [comentario, setComentario] = useState("");
   const [meGusta, setMeGusta] = useState(false);
@@ -34,6 +39,39 @@ function Post({ post, columnas = 6 }) {
   const tiempoTranscurrido = formatDistanceToNow(fechaCreacion, {
     addSuffix: true,
   });
+
+  const options = [
+    "Eliminar",
+    "Editar"
+  ];
+
+  const ITEM_HEIGHT = 48;
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleClickOption = (e) => {
+    if(e.target.childNodes[0].data === 'Eliminar'){
+      deleteDoc(doc(db, "Noticias", idPost))
+      .then(() => {
+        obtenerPosteosUsuario(uid);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+    
+    if(e.target.childNodes[0].data === 'Editar'){
+      console.log('Editar posteo');
+    }
+  };
 
   const handleMuestraComentario = () => {
     setMuestraComent((previa) => !previa);
@@ -53,6 +91,7 @@ function Post({ post, columnas = 6 }) {
     setMeGusta((previa) => !previa);
   };
 
+
   return (
     <Container fluid id="containerPost">
       <Row id="rowPost">
@@ -70,6 +109,46 @@ function Post({ post, columnas = 6 }) {
                     <strong id="nombreUsuarioPost">{post.aka}</strong>
                   </Typography>
                 </Col>
+                {
+                  uid === post.usuarioId ? 
+                  (
+                    <Col xs={1}>
+                  <div>
+                    <IconButton
+                      aria-label="more"
+                      id="long-button"
+                      aria-controls={open ? "long-menu" : undefined}
+                      aria-expanded={open ? "true" : undefined}
+                      aria-haspopup="true"
+                      onClick={handleClick}
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                      id="long-menu"
+                      MenuListProps={{
+                        "aria-labelledby": "long-button",
+                      }}
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      
+                    >
+                      {options.map((option) => (
+                        <MenuItem
+                          key={option}
+                          onClick={handleClickOption}
+                          value={option}
+                        >
+                          {option}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </div>
+                </Col>
+                  ) : 
+                  (<></>)
+                }
               </Row>
               <hr />
               <Typography variant="body2" id="textoPost">

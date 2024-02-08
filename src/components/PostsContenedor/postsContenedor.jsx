@@ -35,7 +35,7 @@ function PostsContenedor() {
   return (
     <Container fluid id="postsContainer">
       {posteos ? (
-        posteos.map((data) => <Post post={data} key={data.id} />)
+        posteos.map((data) => <Post key={data.id} post={data} idPost={data.id} />)
       ) : (
         <Spinner className="spinBatallas" animation="grow" />
       )}

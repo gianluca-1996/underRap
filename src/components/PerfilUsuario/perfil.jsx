@@ -40,7 +40,6 @@ function Perfil() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const docRefUsuario = doc(db, "Usuario", user.uid);
-        //const docRefActividad = doc(db, "Actividad", idUser);
         getDoc(docRefUsuario)
           .then((usuarioRef) => {
             setUid(user.uid);
@@ -65,7 +64,6 @@ function Perfil() {
     getDocs(q)
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        //console.log(doc.id, " => ", doc.data());
         posteosColeccion.push(doc);
       });
 
@@ -183,13 +181,13 @@ function Perfil() {
                 <>
                   <h2>Actividad</h2>
                   {posteos.map((post) => (
-                    <Post key={post.id} post={post.data()} columnas={12} />
+                    <Post key={post.id} post={post.data()} columnas={12} idPost={post.id} 
+                    obtenerPosteosUsuario={obtenerPosteosUsuario} uid={uid}/>
                   ))}
                 </>
               ) : (
                 <h1>No hay actividad del usuario</h1>
               )}
-              {/*dataPost.error && <h1>{dataPost.error}</h1>*/}
             </Col>
           </Row>
         </>
