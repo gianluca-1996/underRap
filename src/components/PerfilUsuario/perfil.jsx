@@ -29,7 +29,6 @@ import "./perfil.css";
 
 function Perfil() {
   const auth = getAuth();
-  // Initialize Cloud Firestore and get a reference to the service
   const db = getFirestore(app);
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState(null);
@@ -177,7 +176,7 @@ function Perfil() {
                 />
               </Container>
 
-              {posteos ? (
+              {posteos?.length ? (
                 <>
                   <h2>Actividad</h2>
                   {posteos.map((post) => (

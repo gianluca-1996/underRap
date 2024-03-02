@@ -74,8 +74,17 @@
     text-decoration: underline;
 }
 
-#rowFotoUser{
+.fotoUserLog{
     justify-content: space-between;
+}
+
+.fotoUser{
+    justify-content: space-around;
+}
+
+#listaComent{
+    list-style: none;
+    padding-left: 0;
 }
 
 @media (max-width: 500px){
