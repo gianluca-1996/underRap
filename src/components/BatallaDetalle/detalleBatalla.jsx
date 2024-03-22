@@ -16,25 +16,35 @@ import CardMedia from '@mui/material/CardMedia';
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import app from "../Firebase/config.js";
 import "./detalleBatalla.css"
 
 
 function DetalleBatalla(){
     const auth = getAuth();
+    const db = getFirestore(app);
     const navigate = useNavigate();
     const param = useParams();
     const eventoId = param.id;
-    const [batalla, setBatalla] = useState()//databatalla.data ? databatalla.data[eventoId - 1] : null;
+    const [batalla, setBatalla] = useState()
+    const [formattedDate, setFormattedDate] = useState();
+    const options = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false, // Usar formato de 24 horas
+    };
 
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
           if (user){
-            fetch('/src/assets/data/evento.json')
-            .then((result) => result.json())
-            .then((data) => {
-                setBatalla(data[eventoId - 1]);
+            getDoc(doc(db, "Evento", eventoId))
+            .then((doc) => {
+                setBatalla(doc.data());
             })
             .catch((error) => {
                 console.log(error);
@@ -54,7 +64,7 @@ function DetalleBatalla(){
             {batalla ? 
             (<Row id='filaDetalle'> 
                 <Col sm={6}>
-                    <img id='imgDetalle' src={batalla.img} alt="evento"/>
+                    <img id='imgDetalle' src={batalla.imagen} alt="evento"/>
                 </Col>
                 <Col sm={6}>
                     <Card id='cardInfoBatalla'>
@@ -66,6 +76,14 @@ function DetalleBatalla(){
                                 <h4 id='tituloEventoInfo'>{batalla.titulo}</h4>
                             </Row>
                             <hr />
+                            <Row>
+                                <Col xs={1}>
+                                    <PersonOutlineOutlinedIcon />
+                                </Col>
+                                <Col>
+                                    <h5>{batalla.organizadorAka}</h5>                    
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col xs={1}>
                                     <InfoOutlinedIcon />
@@ -87,15 +105,9 @@ function DetalleBatalla(){
                                     <CalendarMonthIcon />
                                 </Col>
                                 <Col>
-                                    <h5>{batalla.fecha}</h5>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={1}>
-                                    <AccessTimeIcon />
-                                </Col>
-                                <Col>
-                                    <h5>{batalla.hora}hs.</h5>
+                                    <h5>{new Intl.DateTimeFormat("es-ES", options).format(
+                                        new Date(batalla.fecha.toDate())
+                                    )}</h5>
                                 </Col>
                             </Row>
                             <Row>
@@ -103,15 +115,7 @@ function DetalleBatalla(){
                                     <AttachMoneyIcon />
                                 </Col>
                                 <Col>
-                                    <h5>Inscripción: ${batalla.precio}</h5>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={1}>
-                                    <PersonOutlineOutlinedIcon />
-                                </Col>
-                                <Col>
-                                    <h5>{batalla.organizador}</h5>                    
+                                    <h5>Inscripción: ${batalla.inscripcion}</h5>
                                 </Col>
                             </Row>
                         </CardContent>                        

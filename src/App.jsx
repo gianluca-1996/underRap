@@ -21,7 +21,6 @@ function App() {
           <Route path="/eventos" element={<BatallasContenedor />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/detalleEvento/:id" element={<DetalleBatalla />} />
-          <Route path="/nuevoEvento" element={<FormEvento />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/nuevaCuenta" element={<NuevoUsuarioForm />} />
         </Routes>

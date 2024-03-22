@@ -7,21 +7,21 @@ import { Link } from 'react-router-dom';
 import "./batalla.css"
 
 function Batalla({batalla}){
-
+    const evento = batalla.data;
     return(
         <Card key={batalla.id} sx={{ width: '30vw', height:'60vh', textAlign:'center', padding:'1rem', margin:'3px' }} id='cardItem'>
             <CardMedia
             sx={{ height: '30vh' }}
-            image={batalla.img}
-            title={batalla.titulo}
+            image={evento.imagen}
+            title={evento.titulo}
             id='cardMediaBatalla'
             />
             <CardContent>
             <Typography gutterBottom className='descripcionCard' variant="h5" component="div">
-                {batalla.titulo}
+                {evento.titulo}
             </Typography>
             <Typography className='descripcionCard' variant="body2">
-                {batalla.descripcion}
+                {evento.descripcion}
             </Typography>
             </CardContent>
             <Link to={`/detalleEvento/${batalla.id}`}>

@@ -25,6 +25,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import PostNuevoForm from "../PostNuevoForm/postNuevoForm.jsx";
+import FormEvento from "../FormEvento/formEvento.jsx";
 import "./perfil.css";
 
 function Perfil() {
@@ -100,10 +101,8 @@ function Perfil() {
                   </Link>
                 </Col>
               ) : (
-                <Col sm={2}>
-                  <Link to={"/nuevoEvento"}>
-                    <Boton texto={"Crear Evento"} />
-                  </Link>
+                <Col sm={2} >
+                  <FormEvento usuario={usuario}/>
                 </Col>
               ))}
           </Row>
