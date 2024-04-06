@@ -6,6 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AccountMenu from "../AccountMenu/accountMenu.jsx";
+import BuscadorUsuario from "../BuscadorUsuario/buscadorUsuario.jsx";
 import "./nav.css";
 
 const Nav = () => {
@@ -51,6 +52,9 @@ const Nav = () => {
                   </Link>
                 </Col>
               </Row>
+            </Col>
+            <Col sm={1}>
+              <BuscadorUsuario />
             </Col>
             <Col sm={1}>
               <AccountMenu
