@@ -180,7 +180,7 @@ function Perfil() {
                   <h2>Actividad</h2>
                   {posteos.map((post) => (
                     <Post key={post.id} post={post.data()} columnas={12} idPost={post.id} 
-                    obtenerPosteosUsuario={obtenerPosteosUsuario} uid={uid}/>
+                    obtenerPosteosUsuario={obtenerPosteosUsuario} uid={uid} aka={usuario.aka}/>
                   ))}
                 </>
               ) : (

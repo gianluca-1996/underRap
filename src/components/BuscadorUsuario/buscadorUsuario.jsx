@@ -66,8 +66,8 @@ const BuscadorUsuario = () => {
 
   const handleOnClickUsuario = e => {
     handleClose();
-    //navigate(`/perfil/${e.target.attributes.value.nodeValue}`, { replace: true });
     //TODO: navegar hacia el perfil del usuario seleccionado (nuevo componente de perfil)
+    navigate(`/perfilExterno/${e.target.attributes.value.nodeValue}`);
   }
 
   return (

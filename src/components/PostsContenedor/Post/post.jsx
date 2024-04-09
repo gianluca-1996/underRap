@@ -89,7 +89,6 @@ function Post({ post, idPost, columnas = 6, obtenerPosteos, uid, aka }) {
 
   const onSubmitComentario = (e) => {
     e.preventDefault();
-
     if (e.target.texto.value) {
       let fechaActual = Timestamp.now();
       let comentario = e.target.texto.value;

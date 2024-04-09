@@ -60,7 +60,7 @@ const ComentarioPost = ({ comentario, aka, setComentariosPost, idPost }) => {
       >
         <Row style={{justifyContent: "space-between"}}>
           <Col>
-            <p>{comentario.aka}</p>
+            <p style={{textDecoration: "underline"}}>{comentario.aka}</p>
           </Col>
           <Col xs={1}>
             {aka === comentario.aka && (
@@ -100,7 +100,7 @@ const ComentarioPost = ({ comentario, aka, setComentariosPost, idPost }) => {
             )}
           </Col>
         </Row>
-        <h5>{comentario.comentario}</h5>
+        <h6>{comentario.comentario}</h6>
         <Row>
           <p>{formattedDate}</p>
         </Row>
