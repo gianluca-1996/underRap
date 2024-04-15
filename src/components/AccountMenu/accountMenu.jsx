@@ -12,9 +12,8 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { grey } from '@mui/material/colors';
-import "./accountMenu.css"
 
-export default function AccountMenu({ auth, isLog, logOutHandle }) {
+export default function AccountMenu({ isLog, logOutHandle }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -43,7 +42,6 @@ export default function AccountMenu({ auth, isLog, logOutHandle }) {
       {isLog ? (
         <Menu
           anchorEl={anchorEl}
-          id="account-menu"
           open={open}
           onClose={handleClose}
           onClick={handleClose}
@@ -78,7 +76,7 @@ export default function AccountMenu({ auth, isLog, logOutHandle }) {
         >
           <MenuItem onClick={handleClose}>
             <Avatar />
-            <Link to={"/perfil"} className="linkMenu">
+            <Link to={"/perfil"} style={{textDecoration: "none", color: "#424242"}}>
               Perfil
             </Link>
           </MenuItem>
@@ -139,7 +137,7 @@ export default function AccountMenu({ auth, isLog, logOutHandle }) {
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
-            <Link to={`/login`} className="linkMenu">
+            <Link to={`/login`} style={{textDecoration: "none", color: "#424242"}}>
               Ingresar
             </Link>
           </MenuItem>

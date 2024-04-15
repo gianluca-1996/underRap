@@ -1,0 +1,13 @@
+#buscadorIcon{
+    cursor: pointer;
+    height: 100%;
+}
+
+#lineResult{
+    cursor: pointer;
+    margin-top: 5%;
+}
+
+#PersonSearchIcon{
+    font-size: 50px;
+}

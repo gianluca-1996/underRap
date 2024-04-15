@@ -57,7 +57,7 @@ const Nav = () => {
               <BuscadorUsuario />
             </Col>
             <Col sm={1}>
-              <AccountMenu
+              <AccountMenu 
                 auth={auth}
                 isLog={usuarioLogueado ? true : false}
                 logOutHandle={onClickCierraSesion}

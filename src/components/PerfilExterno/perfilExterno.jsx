@@ -18,11 +18,16 @@ import {
   getDocs,
   collection,
   orderBy,
+  updateDoc,
+  arrayRemove,
+  arrayUnion
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useParams } from "react-router";
+import PersonAddAlt1RoundedIcon from '@mui/icons-material/PersonAddAlt1Rounded';
+import HowToRegRoundedIcon from '@mui/icons-material/HowToRegRounded';
 import "./perfilExterno.css";
 
 function PerfilExterno() {
@@ -40,19 +45,8 @@ function PerfilExterno() {
       if (userLogueado) {
         const docRefUsuarioLogueado = doc(db, "Usuario", userLogueado.uid);
         getDoc(docRefUsuarioLogueado)
-        .then((usuarioRef) => {
-          setUsuarioLogueado({uid: userLogueado.uid, ...usuarioRef.data()});
-        })
-        .catch((error) => {
-          console.log("Error...", error);
-        });
-
-        const docRefUsuario = doc(db, "Usuario", uidExterno);
-        getDoc(docRefUsuario)
           .then((usuarioRef) => {
-            setUidExterno(uidExterno);
-            setUsuario(usuarioRef.data());
-            obtenerPosteosUsuario(uidExterno);
+            setUsuarioLogueado({ uid: userLogueado.uid, ...usuarioRef.data() });
           })
           .catch((error) => {
             console.log("Error...", error);
@@ -61,6 +55,18 @@ function PerfilExterno() {
         navigate("/login", { replace: true });
       }
     });
+
+    //USUARIO EXTERNO
+    const docRefUsuario = doc(db, "Usuario", uidExterno);
+    getDoc(docRefUsuario)
+      .then((usuarioRef) => {
+        setUidExterno(uidExterno);
+        setUsuario(usuarioRef.data());
+        obtenerPosteosUsuario(uidExterno);
+      })
+      .catch((error) => {
+        console.log("Error...", error);
+      });
 
     return () => unsubscribe();
   }, []);
@@ -86,6 +92,30 @@ function PerfilExterno() {
       });
   };
 
+  const comenzarASeguir = async () => {
+    await updateDoc(doc(db, "Usuario", uidExterno), {
+      seguidores: arrayUnion({aka: usuarioLogueado.aka, uid: usuarioLogueado.uid})
+    });
+    
+    usuario.seguidores.push({aka: usuarioLogueado.aka, uid: usuarioLogueado.uid});
+    setUsuario(prev => ({
+      ...prev,
+      seguidores: usuario.seguidores
+    }));
+  }
+
+  const dejarDeSeguir = async () => {
+    await updateDoc(doc(db, "Usuario", uidExterno), {
+      seguidores: arrayRemove({aka: usuarioLogueado.aka, uid: usuarioLogueado.uid})
+    });
+
+    const seguidores = usuario.seguidores.filter(seguidor => {seguidor.uid !== usuarioLogueado.uid}) ;
+    setUsuario(prev => ({
+      ...prev,
+      seguidores: seguidores
+    }));
+  }
+
   return (
     <Container fluid id="contenedorPerfil">
       {usuario ? (
@@ -100,10 +130,23 @@ function PerfilExterno() {
             />
           </div>
           <Row id="rowAKA">
-            <Col sm={4}>
+            <Col sm={3}>
               <h2 className="usuarioInfoPerfil tituloAkaUsuario">
-                AKA: "{usuario.aka}"
+                {usuario.aka}
               </h2>
+            </Col>
+            <Col sm={1}>
+              {usuario.seguidores.find(seguidor => seguidor.uid === usuarioLogueado.uid) ? 
+                <>
+                  <HowToRegRoundedIcon onClick={dejarDeSeguir} style={{color: "#eeeeee", fontSize: "60px", cursor: "pointer"}}/> 
+                  <p className="infoSeguidor">Seguido</p>
+                </>
+                : 
+                <>
+                  <PersonAddAlt1RoundedIcon onClick={comenzarASeguir} style={{color: "#eeeeee", fontSize: "60px", cursor: "pointer"}}/>
+                  <p className="infoSeguidor">Seguir</p>
+                </>
+              }
             </Col>
           </Row>
           <Row id="rowInfoUsuario">

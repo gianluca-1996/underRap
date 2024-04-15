@@ -66,6 +66,9 @@
     justify-content: space-between;
 }
 
+.infoSeguidor{
+    color: #eeeeee;
+}
 
 @media (max-width: 500px){
     #fotoPerfil{

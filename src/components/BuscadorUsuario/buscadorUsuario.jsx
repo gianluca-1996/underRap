@@ -15,6 +15,7 @@ import {
 import app from "../Firebase/config.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./buscadorUsuario.css"
 
 const style = {
   position: "absolute",
@@ -22,6 +23,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
+  height: 250,
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
@@ -71,8 +73,8 @@ const BuscadorUsuario = () => {
   }
 
   return (
-    <div>
-      <PersonSearchIcon onClick={handleOpen} />
+    <div id="buscadorIcon">
+      <PersonSearchIcon onClick={handleOpen} id="PersonSearchIcon"/>
       <Modal
         open={open}
         onClose={handleClose}
@@ -84,14 +86,13 @@ const BuscadorUsuario = () => {
             <h3>Buscar usuario</h3>
             <TextField
               id="outlined-basic"
-              label="usuario/aka"
+              label="ingresar usuario/aka"
               variant="outlined"
-              style={{ width: "100%" }}
               onChange={onChangeText}
             />
           </Row>
           {listaUsuarios.length > 0 && 
-            listaUsuarios.map(usuario => <Row key={usuario.id}>
+            listaUsuarios.map(usuario => <Row key={usuario.id} id="lineResult">
               <Col>
                 foto
               </Col>
