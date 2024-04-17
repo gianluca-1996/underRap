@@ -20,14 +20,18 @@ import {
   orderBy,
   updateDoc,
   arrayRemove,
-  arrayUnion
+  arrayUnion,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useParams } from "react-router";
-import PersonAddAlt1RoundedIcon from '@mui/icons-material/PersonAddAlt1Rounded';
-import HowToRegRoundedIcon from '@mui/icons-material/HowToRegRounded';
+import PersonAddAlt1RoundedIcon from "@mui/icons-material/PersonAddAlt1Rounded";
+import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import "./perfilExterno.css";
 
 function PerfilExterno() {
@@ -39,6 +43,23 @@ function PerfilExterno() {
   const [posteos, setPosteos] = useState(null);
   const [uidExterno, setUidExterno] = useState(param.id);
   const [usuarioLogueado, setUsuarioLogueado] = useState();
+  const [openSeguidores, setOpenSeguidores] = useState(false);
+  const [openSeguidos, setOpenSeguidos] = useState(false);
+  const handleOpenSeguidores = () => setOpenSeguidores(true);
+  const handleOpenSeguidos = () => setOpenSeguidos(true);
+  const handleCloseSeguidores = () => setOpenSeguidores(false);
+  const handleCloseSeguidos = () => setOpenSeguidos(false);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userLogueado) => {
@@ -93,33 +114,117 @@ function PerfilExterno() {
   };
 
   const comenzarASeguir = async () => {
+    //ACTUALIZAR LOS SEGUIDORES
     await updateDoc(doc(db, "Usuario", uidExterno), {
-      seguidores: arrayUnion({aka: usuarioLogueado.aka, uid: usuarioLogueado.uid})
+      seguidores: arrayUnion({
+        aka: usuarioLogueado.aka,
+        uid: usuarioLogueado.uid,
+      }),
     });
-    
-    usuario.seguidores.push({aka: usuarioLogueado.aka, uid: usuarioLogueado.uid});
-    setUsuario(prev => ({
+
+    setUsuario((prev) => ({
       ...prev,
-      seguidores: usuario.seguidores
+      seguidores: [
+        ...usuario.seguidores,
+        { aka: usuarioLogueado.aka, uid: usuarioLogueado.uid },
+      ],
     }));
-  }
+
+    //ACTUALIZAR MIS SEGUIDOS
+    await updateDoc(doc(db, "Usuario", usuarioLogueado.uid), {
+      seguidos: arrayUnion({ aka: usuario.aka, uid: uidExterno }),
+    });
+
+    setUsuarioLogueado((prev) => ({
+      ...prev,
+      seguidos: [
+        ...usuarioLogueado.seguidos,
+        { aka: usuario.aka, uid: uidExterno },
+      ],
+    }));
+  };
 
   const dejarDeSeguir = async () => {
+    //ACTUALIZAR SEGUIDORES
     await updateDoc(doc(db, "Usuario", uidExterno), {
-      seguidores: arrayRemove({aka: usuarioLogueado.aka, uid: usuarioLogueado.uid})
+      seguidores: arrayRemove({
+        aka: usuarioLogueado.aka,
+        uid: usuarioLogueado.uid,
+      }),
     });
 
-    const seguidores = usuario.seguidores.filter(seguidor => {seguidor.uid !== usuarioLogueado.uid}) ;
-    setUsuario(prev => ({
+    const seguidores = usuario.seguidores.filter((seguidor) => {
+      seguidor.uid !== usuarioLogueado.uid;
+    });
+    setUsuario((prev) => ({
       ...prev,
-      seguidores: seguidores
+      seguidores: seguidores,
     }));
-  }
+
+    //ACTUALIZAR MIS SEGUIDOS
+    await updateDoc(doc(db, "Usuario", usuarioLogueado.uid), {
+      seguidores: arrayRemove({ aka: usuario.aka, uid: usuario.uid }),
+    });
+
+    const misSeguidos = usuarioLogueado.seguidos.filter((seguidor) => {
+      seguidor.uid !== usuario.uid;
+    });
+    setUsuarioLogueado((prev) => ({
+      ...prev,
+      seguidos: misSeguidos,
+    }));
+  };
 
   return (
     <Container fluid id="contenedorPerfil">
       {usuario ? (
         <>
+          <div>
+            <Modal
+              open={openSeguidores}
+              onClose={handleCloseSeguidores}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <h4>Seguidores:</h4>
+                {usuario.seguidores.length > 0 ? (
+                  <ul>
+                    {usuario.seguidores.map((seguidor) => (
+                      <li key={seguidor.aka}>
+                        <p>{seguidor.aka}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <h4>No hay usuarios</h4>
+                )}
+              </Box>
+            </Modal>
+          </div>
+          <div>
+            <Modal
+              open={openSeguidos}
+              onClose={handleCloseSeguidos}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <h4>Seguidos:</h4>
+                {usuario.seguidos.length > 0 ? (
+                  <ul>
+                    {usuario.seguidos.map((seguidor) => (
+                      <li key={seguidor.aka}>
+                        <p>{seguidor.aka}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <h4>No hay usuarios</h4>
+                )}
+              </Box>
+            </Modal>
+          </div>
           <div
             id="portada"
             style={{ backgroundImage: `url(${usuario.portada})` }}
@@ -136,17 +241,37 @@ function PerfilExterno() {
               </h2>
             </Col>
             <Col sm={1}>
-              {usuario.seguidores.find(seguidor => seguidor.uid === usuarioLogueado.uid) ? 
+              {usuario.seguidores.find(
+                (seguidor) => seguidor.uid === usuarioLogueado.uid
+              ) ? (
                 <>
-                  <HowToRegRoundedIcon onClick={dejarDeSeguir} style={{color: "#eeeeee", fontSize: "60px", cursor: "pointer"}}/> 
-                  <p className="infoSeguidor">Seguido</p>
+                  <HowToRegRoundedIcon
+                    onClick={dejarDeSeguir}
+                    style={{
+                      color: "#eeeeee",
+                      fontSize: "60px",
+                      cursor: "pointer",
+                    }}
+                  />
+                  <p className="infoSeguidor" onClick={dejarDeSeguir}>
+                    Seguido
+                  </p>
                 </>
-                : 
+              ) : (
                 <>
-                  <PersonAddAlt1RoundedIcon onClick={comenzarASeguir} style={{color: "#eeeeee", fontSize: "60px", cursor: "pointer"}}/>
-                  <p className="infoSeguidor">Seguir</p>
+                  <PersonAddAlt1RoundedIcon
+                    onClick={comenzarASeguir}
+                    style={{
+                      color: "#eeeeee",
+                      fontSize: "60px",
+                      cursor: "pointer",
+                    }}
+                  />
+                  <p className="infoSeguidor" onClick={comenzarASeguir}>
+                    Seguir
+                  </p>
                 </>
-              }
+              )}
             </Col>
           </Row>
           <Row id="rowInfoUsuario">
@@ -156,12 +281,20 @@ function PerfilExterno() {
                   <AssignmentIndIcon color="primary" />
                 </Col>
                 <Col>
-                  <h4 className="usuarioInfoPerfil">
+                  <h4
+                    className="usuarioInfoPerfil"
+                    onClick={handleOpenSeguidores}
+                    style={{ cursor: "pointer" }}
+                  >
                     Seguidores: {usuario.seguidores.length}
                   </h4>
                 </Col>
                 <Col>
-                  <h4 className="usuarioInfoPerfil">
+                  <h4
+                    className="usuarioInfoPerfil"
+                    onClick={handleOpenSeguidos}
+                    style={{ cursor: "pointer" }}
+                  >
                     Seguidos: {usuario.seguidos.length}
                   </h4>
                 </Col>
