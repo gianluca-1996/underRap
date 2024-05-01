@@ -19,6 +19,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 function FormEvento({usuario}) {
   const auth = getAuth();
@@ -59,23 +60,54 @@ function FormEvento({usuario}) {
   }, []);
 
   const onSubmit = (data) => {
-    addDoc(collection(db, "Evento"), {
+    const storage = getStorage();
+      const imgRef = ref(storage, `img/${data.img[0].name}`);
+      uploadBytes(imgRef, data.img[0])
+      .then(() => {  
+        getDownloadURL(imgRef)
+        .then(url => {
+          addDoc(collection(db, "Evento"), {
+            titulo: data.titulo,
+            localidad: data.localidad,
+            fecha: Timestamp.fromDate(new Date(`${data.fecha}T${data.hora}`)),
+            imagen: `${url}`,
+            inscripcion: data.precio,
+            organizadorAka: usuario.aka,
+            organizadorId: uid,
+            descripcion: data.descripcion,
+          })
+          .then(() => {
+            alert("evento creado con éxito!");
+            navigate("/eventos", { replace: true });
+          })
+          .catch(error => alert("ERROR, no se pudo crear el evento"))
+        })
+      });
+    /*addDoc(collection(db, "Evento"), {
       titulo: data.titulo,
       localidad: data.localidad,
       fecha: Timestamp.fromDate(new Date(`${data.fecha}T${data.hora}`)),
-      imagen: "/src/assets/img/imagen1.jpg",
+      imagen: `${data.img[0].name}`,
       inscripcion: data.precio,
       organizadorAka: usuario.aka,
       organizadorId: uid,
       descripcion: data.descripcion,
     })
-      .then(() => {
-        alert("evento creado con éxito!");
-        navigate("/eventos", { replace: true });
-      })
-      .catch((error) => {
-        console.log(error);
+    .then(() => {        
+      const storage = getStorage();
+      const imgRef = ref(storage, `img/${data.img[0].name}`);
+      uploadBytes(imgRef, data.img[0]).then((snapshot) => {  
+        getDownloadURL(imgRef)
+        .then(url => {
+          console.log(url);
+          alert("evento creado con éxito!");
+          navigate("/eventos", { replace: true });
+        })
       });
+    })
+    .catch((error) => {
+      console.log(error);
+    });*/
   };
 
   return (
@@ -193,6 +225,21 @@ function FormEvento({usuario}) {
                           })}
                         />
                         {errors.descripcion?.type === "required" && (
+                          <p role="alert">This field is required</p>
+                        )}
+                      </Row>
+                      <Row className="rowInputForm">
+                        <input 
+                          id="img"
+                          label="Imagen"
+                          variant="outlined"
+                          className="inputFormEvento"
+                          type="file"
+                          {...register("img", {
+                            required: true,
+                          })}
+                        />
+                        {errors.img?.type === "required" && (
                           <p role="alert">This field is required</p>
                         )}
                       </Row>
