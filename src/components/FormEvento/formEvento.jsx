@@ -26,7 +26,8 @@ function FormEvento({usuario}) {
   const db = getFirestore(app);
   const navigate = useNavigate();
   const [uid, setUid] = useState();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [btnTextLoad, setBtnTextLoad] = useState('Crear Evento');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const style = {
@@ -60,6 +61,7 @@ function FormEvento({usuario}) {
   }, []);
 
   const onSubmit = (data) => {
+    setBtnTextLoad('Cargando...');
     const storage = getStorage();
       const imgRef = ref(storage, `img/${data.img[0].name}`);
       uploadBytes(imgRef, data.img[0])
@@ -83,31 +85,6 @@ function FormEvento({usuario}) {
           .catch(error => alert("ERROR, no se pudo crear el evento"))
         })
       });
-    /*addDoc(collection(db, "Evento"), {
-      titulo: data.titulo,
-      localidad: data.localidad,
-      fecha: Timestamp.fromDate(new Date(`${data.fecha}T${data.hora}`)),
-      imagen: `${data.img[0].name}`,
-      inscripcion: data.precio,
-      organizadorAka: usuario.aka,
-      organizadorId: uid,
-      descripcion: data.descripcion,
-    })
-    .then(() => {        
-      const storage = getStorage();
-      const imgRef = ref(storage, `img/${data.img[0].name}`);
-      uploadBytes(imgRef, data.img[0]).then((snapshot) => {  
-        getDownloadURL(imgRef)
-        .then(url => {
-          console.log(url);
-          alert("evento creado con éxito!");
-          navigate("/eventos", { replace: true });
-        })
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });*/
   };
 
   return (
@@ -229,6 +206,7 @@ function FormEvento({usuario}) {
                         )}
                       </Row>
                       <Row className="rowInputForm">
+                        <p>Imagen para el evento:</p>
                         <input 
                           id="img"
                           label="Imagen"
@@ -244,7 +222,7 @@ function FormEvento({usuario}) {
                         )}
                       </Row>
                       <Row id="rowBtnCrearEvento">
-                        <Boton texto={"Crear Evento"} submit="submit" />
+                        <Boton texto={btnTextLoad} submit="submit" />
                       </Row>
                     </form>
                   </Col>
