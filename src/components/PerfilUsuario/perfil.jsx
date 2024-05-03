@@ -26,6 +26,8 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import PostNuevoForm from "../PostNuevoForm/postNuevoForm.jsx";
 import FormEvento from "../FormEvento/formEvento.jsx";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 import "./perfil.css";
 
 function Perfil() {
@@ -35,6 +37,23 @@ function Perfil() {
   const [usuario, setUsuario] = useState(null);
   const [posteos, setPosteos] = useState(null);
   const [uid, setUid] = useState();
+  const [openSeguidores, setOpenSeguidores] = useState(false);
+  const [openSeguidos, setOpenSeguidos] = useState(false);
+  const handleOpenSeguidores = () => setOpenSeguidores(true);
+  const handleOpenSeguidos = () => setOpenSeguidos(true);
+  const handleCloseSeguidores = () => setOpenSeguidores(false);
+  const handleCloseSeguidos = () => setOpenSeguidos(false);
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -78,6 +97,52 @@ function Perfil() {
     <Container fluid id="contenedorPerfil">
       {usuario ? (
         <>
+                  <div>
+            <Modal
+              open={openSeguidores}
+              onClose={handleCloseSeguidores}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <h4>Seguidores:</h4>
+                {usuario.seguidores.length > 0 ? (
+                  <ul>
+                    {usuario.seguidores.map((seguidor) => (
+                      <li key={seguidor.aka}>
+                        <p>{seguidor.aka}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <h4>No hay usuarios</h4>
+                )}
+              </Box>
+            </Modal>
+          </div>
+          <div>
+            <Modal
+              open={openSeguidos}
+              onClose={handleCloseSeguidos}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <h4>Seguidos:</h4>
+                {usuario.seguidos.length > 0 ? (
+                  <ul>
+                    {usuario.seguidos.map((seguidor) => (
+                      <li key={seguidor.aka}>
+                        <p>{seguidor.aka}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <h4>No hay usuarios</h4>
+                )}
+              </Box>
+            </Modal>
+          </div>
           <div
             id="portada"
             style={{ backgroundImage: `url(${usuario.portada})` }}
@@ -113,12 +178,20 @@ function Perfil() {
                   <AssignmentIndIcon color="primary" />
                 </Col>
                 <Col>
-                  <h4 className="usuarioInfoPerfil">
+                  <h4 
+                    className="usuarioInfoPerfil"
+                    onClick={handleOpenSeguidores}
+                    style={{ cursor: "pointer" }}
+                  >
                     Seguidores: {usuario.seguidores.length}
                   </h4>
                 </Col>
                 <Col>
-                  <h4 className="usuarioInfoPerfil">
+                  <h4 
+                    className="usuarioInfoPerfil"
+                    onClick={handleOpenSeguidos}
+                    style={{ cursor: "pointer" }}
+                  >
                     Seguidos: {usuario.seguidos.length}
                   </h4>
                 </Col>

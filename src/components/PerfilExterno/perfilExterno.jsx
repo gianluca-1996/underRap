@@ -29,8 +29,6 @@ import { useParams } from "react-router";
 import PersonAddAlt1RoundedIcon from "@mui/icons-material/PersonAddAlt1Rounded";
 import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "./perfilExterno.css";
 
